@@ -1,0 +1,14 @@
+{% extends "alf_db/base.html" %}
+
+{% block content %}
+  <p>Clientes</p>
+
+    <ul>
+      {% for customer in customers %}
+        <li>{{ customer }}</li>
+      {% empty %}
+        <li>No hay clientes agregados aún.</li>
+      {% endfor %}
+    </ul>
+        
+{% endblock content %}
