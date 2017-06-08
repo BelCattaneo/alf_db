@@ -1,14 +1,40 @@
-{% extends "alf_db/base.html" %}
+{% extends "alf_db/base.html" %} {% block content %}
 
-{% block content %}
-  <p>Clientes</p>
 
-    <ul>
-      {% for customer in customers %}
-        <li>{{ customer }}</li>
-      {% empty %}
-        <li>No hay clientes agregados aún.</li>
-      {% endfor %}
-    </ul>
-        
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>E-Mail</th>
+            <th>Facebook</th>
+            <th>Fecha</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for customer in customers %}
+          <tr>
+            <th scope="row">{{ customer.id }}</th>
+            <td>{{ customer }}</td>
+            <td>{{ customer.address }}</td>
+            <td>{{ customer.phone }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.facebook_username }}</td>
+            <td>{{ customer.date_added|date }}, {{ customer.date_added|time }}</td>
+            <td></td>
+          </tr>
+        {% empty %}
+          <li>No hay clientes agregados aún.</li>
+        {% endfor %}
+            
+    </tbody>
+</table>
+
+
+
+
 {% endblock content %}
