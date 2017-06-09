@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
 from .models import Customer
 
@@ -14,6 +14,11 @@ def customers(request):
     context = {'customers': customers}
     return render(request, 'alf_db/customers.html', context)
 
-def delete_customer(request):
+def delete_customer(request, customer_id):
     '''Deletes a customer'''
-    return redirect('customers')
+    if request.method != "POST":
+        raise Http404
+    else:
+        customer = Customer.objects.get(id=customer_id)
+        customer.delete()
+    return redirect('/customers')

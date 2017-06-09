@@ -25,7 +25,12 @@
             <td>{{ customer.email }}</td>
             <td>{{ customer.facebook_username }}</td>
             <td>{{ customer.date_added|date }}, {{ customer.date_added|time }}</td>
-            <td></td>
+            <td>
+              <form action="{% url 'alf_db:delete_customer' customer.id %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+              </form>
+            </td>
           </tr>
         {% empty %}
           <li>No hay clientes agregados aún.</li>
