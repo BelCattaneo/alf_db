@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib import admin
 
-
 class Customer(models.Model):
     '''A customer'''
     first_name = models.CharField(max_length=50)

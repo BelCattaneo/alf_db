@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Other Apps
+    'django_tables2',
+    'django_filters',
+
     # My Apps
     'alf_db',
 ]
@@ -65,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -127,3 +132,26 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 DATE_FORMAT = 'Y/m/d'
+
+LOGGING = { 'version': 1,
+            'filters': { 
+                'require_debug_true': { 
+                    '()': 'django.utils.log.RequireDebugTrue', 
+                    } 
+                }, 
+            'handlers': { 
+                'console': { 
+                    'level': 'DEBUG', 
+                    'filters': ['require_debug_true'], 
+                    'class': 'logging.StreamHandler', 
+                    } 
+                }, 
+            'loggers': {
+                'django.db.backends': {
+                    'level': 'DEBUG',
+                    'handlers': ['console'], 
+                    } 
+                } 
+            }
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap.html"

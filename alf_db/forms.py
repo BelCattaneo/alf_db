@@ -2,6 +2,7 @@ from django import forms
 
 from .models import Customer
 
+# Customers Form
 class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
@@ -10,7 +11,5 @@ class CustomerForm(forms.ModelForm):
                   'last_name': 'Apellido',
                   'address': 'Dirección',
                   'phone': 'Teléfono',
-                  'email': 'EMail',
+                  'email': 'E-Mail',
                   'facebook_username': 'Facebook'}
-
-        

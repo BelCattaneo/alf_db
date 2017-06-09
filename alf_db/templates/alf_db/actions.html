@@ -1,0 +1,11 @@
+{# View link #} 
+<a href="{% url 'alf_db:detail' record.id %}">Ver</a>
+
+{# Edit Link #}
+<a href="{% url 'alf_db:edit_customer' record.id %}">Editar</a>
+
+{# Delete button #}
+<form class="form-inline" action="{% url 'alf_db:delete_customer' record.id %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Borrar">
+</form>

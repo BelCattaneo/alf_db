@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.views import generic
 from django.core.urlresolvers import reverse
+from django_tables2 import RequestConfig
+
 
 from .models import Customer
 from .forms import CustomerForm
+from .tables import CustomerTable
+from .filters import CustomersFilter
 
 
 def index(request):
@@ -13,8 +17,17 @@ def index(request):
 
 def customers(request):
     '''Customers page. Show all customers'''
-    customers = Customer.objects.order_by('date_added')
-    context = {'customers': customers}
+    
+    # Data for the table rendering with django_tables2
+    customers_query = Customer.objects.all()
+    
+    filter = CustomersFilter(request.GET, queryset=customers_query)
+
+    table = CustomerTable(filter.qs)
+    RequestConfig(request, paginate={'per_page':10}).configure(table)
+
+    context = {'table': table, 'filter': filter}
+    
     return render(request, 'alf_db/customers.html', context)
 
 def add_customer(request):
@@ -65,3 +78,4 @@ def edit_customer(request, customer_id):
     
     context = {'form': form, 'customer': customer}
     return render(request, 'alf_db/edit_customer.html', context)
+
