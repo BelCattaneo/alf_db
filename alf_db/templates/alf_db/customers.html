@@ -1,5 +1,8 @@
 {% extends "alf_db/base.html" %} {% block content %}
 
+<a href="{% url 'alf_db:add_customer' %}">
+  <button type="button" class="btn btn-primary">Agregar Cliente</button>
+ </a>
 
 <table class="table table-striped">
     <thead>
@@ -26,9 +29,11 @@
             <td>{{ customer.facebook_username }}</td>
             <td>{{ customer.date_added|date }}, {{ customer.date_added|time }}</td>
             <td>
-              <form action="{% url 'alf_db:delete_customer' customer.id %}" method="POST">
+              <a href="{% url 'alf_db:detail' customer.id %}">Ver</a>
+              <a href="{% url 'alf_db:edit_customer' customer.id %}">Editar</a>
+              <form class="form-inline" action="{% url 'alf_db:delete_customer' customer.id %}" method="POST">
                 {% csrf_token %}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Borrar">
               </form>
             </td>
           </tr>

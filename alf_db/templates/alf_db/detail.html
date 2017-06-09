@@ -1,0 +1,24 @@
+{% extends "alf_db/base.html" %} 
+
+{% block content %}
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ customer }} - ID: {{ customer.id }}</h3>
+    </div>
+  </div>
+
+  <ul class="list-group">
+    <li class="list-group-item">Dirección: {{ customer.address }}</li>
+    <li class="list-group-item">Teléfono: {{ customer.phone }}</li>
+    <li class="list-group-item">E-Mail: {{ customer.email }}</li>
+    <li class="list-group-item">Facebook: {{customer.facebook_username}} </li>
+  </ul>
+  
+  <a href="{% url 'alf_db:edit_customer' customer.id %}">Editar</a>
+  <form class="form-inline" action="{% url 'alf_db:delete_customer' customer.id %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Borrar">
+  </form>
+
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends "alf_db/base.html" %} 
+
+{% block content %}
+
+<p>Editar Cliente:</p>  
+
+<form action="{% url 'alf_db:edit_customer' customer.id %}" method='post'>
+  {% csrf_token %}
+  {{ form.as_p }}
+  
+  <button name="submit">Guardar</button>
+</form>
+
+{% endblock content %}
