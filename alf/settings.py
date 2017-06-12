@@ -156,11 +156,14 @@ LOGGING = { 'version': 1,
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap.html"
 
+
 # Heroku settings
-if os.getcwd == '/app':
+
+
+if os.getenv('ENV', 'dev') == 'heroku':
     import dj_database_url
     DATABASES = {
-        'default': dj_database_url.config(default='postgres://localhost')
+        'default': dj_database_url.config(default=os.getenv('DATABASE_URL', 'postgres://localhost'))
     }
 
     #Honor the 'X-Forwarded-Proto' header for request.is_secure().
@@ -172,6 +175,8 @@ if os.getcwd == '/app':
     # Static asset configuration
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    print(STATIC_ROOT)
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
     )
