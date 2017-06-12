@@ -1,0 +1,19 @@
+<div class="btn-group">
+
+  {# View link #} 
+  <a href="{% url 'alf_db:customer_detail' record.id %}">
+    <button type="button" class="btn btn-link btn-xs">Ver</button>
+  </a>
+  
+  {# Edit Link #}
+  <a href="{% url 'alf_db:edit_customer' record.id %}">
+    <button type="button" class="btn btn-link btn-xs">Editar</button>
+  </a>
+  
+  {# Delete button #}
+  <form class="form-inline" action="{% url 'alf_db:delete_customer' record.id %}" method="POST">
+    {% csrf_token %}
+    <button type="button" class="btn btn-link btn-xs">Borrar</button>
+  </form>
+
+</div>

@@ -18,3 +18,16 @@ class Customer(models.Model):
     def __str__(self):
         '''Returns a string representation of the model.'''
         return self.full_name()
+
+class Product(models.Model):
+    '''A Product'''
+    name = models.CharField(max_length=50)
+    code = models.CharField(max_length=50)
+    quantity = models.IntegerField()
+    minimum_stock = models.IntegerField()
+    description = models.CharField(max_length=200)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        '''Returns a string representation of the model.'''
+        return self.name

@@ -1,0 +1,26 @@
+{% extends "alf_db/base.html" %} 
+
+{% block content %}
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ product }} - ID: {{ product.id }}</h3>
+    </div>
+  </div>
+
+  <ul class="list-group">
+    <li class="list-group-item">Código: {{ product.code }}</li>
+    <li class="list-group-item">Cantidad: {{ product.quantity }}</li>
+    <li class="list-group-item">Stock Mínimo: {{ product.minimum_stock }}</li>
+    <li class="list-group-item">Descripción: {{product.description}} </li>
+  </ul>
+  
+  <a href="{% url 'alf_db:edit_product' product.id %}">
+    <button type="button" class="btn btn-primary active">Editar</button>
+  </a>
+  <form class="form-inline" action="{% url 'alf_db:delete_product' product.id %}" method="POST">
+    {% csrf_token %}
+    <button type="button" class="btn btn-primary active">Editar</button>
+  </form>
+
+{% endblock content %}

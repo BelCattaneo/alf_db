@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Customer
+from .models import Customer, Product
 
 # Customers Form
 class CustomerForm(forms.ModelForm):
@@ -13,3 +13,14 @@ class CustomerForm(forms.ModelForm):
                   'phone': 'Teléfono',
                   'email': 'E-Mail',
                   'facebook_username': 'Facebook'}
+
+# Products Form
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'code', 'quantity', 'minimum_stock', 'description']
+        labels = {'name':'Nombre',
+                  'code': 'Código',
+                  'quantity': 'Cantitad',
+                  'minimum_stock': 'Stock Mínimo',
+                  'description': 'Descripción'}

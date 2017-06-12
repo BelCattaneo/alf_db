@@ -1,3 +1,5 @@
+{% load nav_helpers %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,15 +23,9 @@
     <![endif]-->
   </head>
 
+  
+  
   <body>
-
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="{% url 'alf_db:customers' %}">Clientes</a></li>
-        <li role="presentation"><a href="#">Productos</a></li>
-        <li role="presentation"><a href="#">Transacciones</a></li>
-    </ul>
-
-    {% block content %}{% endblock content %}
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -37,5 +33,24 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
             crossorigin="anonymous"></script>
+
+
+   <ul class="nav nav-tabs">
+    <li role="presentation" class="{% active request '/customers' %}">
+      <a href="{% url 'alf_db:customers' %}">Clientes</a>
+    </li>
+    <li role="presentation" class="{% active request '/products' %}">
+        <a href="{% url 'alf_db:products' %}">Productos</a>
+    </li>
+
+    {% comment %} <li role="presentation" class="{% active request '/transactions' %}">
+        <a href="{% url 'alf_db:transactions' %}">Transacciones</a>
+    </li> {% endcomment %}
+
+    <li role="presentation"><a href="#">Transacciones</a></li>
+</ul>
+
+    {% block content %}{% endblock content %}
+
   </body>
 </html>
