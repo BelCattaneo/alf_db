@@ -14,7 +14,7 @@ from .filters import CustomersFilter, ProductsFilter
 
 def index(request):
     '''The Home Page'''
-    return render(request, 'alf_db/index.html')
+    return redirect('/customers')
 
 #---------------------
 # CUSTOMERS
