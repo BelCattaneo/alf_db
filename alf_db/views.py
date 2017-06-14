@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django_tables2 import RequestConfig
 from django.db.models import F
 
+import json
 
 from .models import Customer, Product
 from .forms import CustomerForm, ProductForm
@@ -31,7 +32,12 @@ def customers(request):
     table = CustomerTable(filter.qs)
     RequestConfig(request, paginate={'per_page':10}).configure(table)
 
-    context = {'table': table, 'filter': filter}
+    customers_filter_fields = CustomersFilter.Meta.fields
+
+    context = {'table': table,
+               'filter': filter,
+               'customers_filter_fields': json.dumps(customers_filter_fields)
+    }
     
     return render(request, 'alf_db/customers.html', context)
 
@@ -100,7 +106,13 @@ def products(request):
     table = ProductTable(filter.qs)
     RequestConfig(request, paginate={'per_page':10}).configure(table)
 
-    context = {'table': table, 'filter': filter, 'alert_products': alert_products}
+    products_filter_fields = ProductsFilter.Meta.fields
+
+    context = {'table': table,
+               'filter': filter,
+               'alert_products': alert_products,
+               'products_filter_fields': json.dumps(products_filter_fields)
+    }
     
     return render(request, 'alf_db/products.html', context)
 

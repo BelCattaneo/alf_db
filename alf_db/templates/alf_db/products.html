@@ -1,5 +1,7 @@
 {% extends "alf_db/base.html" %}
 
+
+
 {% block content %}
 
 
@@ -11,7 +13,7 @@
           <div id="demo" class="collapse">
               {% for product in alert_products %}
                 <p>
-                  · <a href="{% url 'alf_db:product_detail' product.id %}">{{product}}</a>
+                  <a href="{% url 'alf_db:product_detail' product.id %}">{{product}}</a>
                 </p>
               {% endfor %}
           </div>
@@ -29,9 +31,24 @@
 {% render_table table %}
 
 <form action="{% url 'alf_db:products' %}" method='get'>
-  {{ filter.form.as_p }}
-  <button type="submit">Buscar</button>
+  <div class="btn-group" id="container_filter_name">
+  </div>
+
+  <div class="btn-group" id="container_filter_type">
+  </div>
+
+  <input id="filter_value" type="text"></input>
 </form>
 
 {% endblock content %}
 
+{% block mocha %}
+  {% load static %}
+    <script type="text/javascript">
+      window.alfDb = window.alfDb || [];
+      window.alfDb.filters = {{ products_filter_fields | safe }}
+    </script>
+
+    <script src="{% static "alf_db/filters.js" %}" ></script>
+
+{% endblock mocha %}

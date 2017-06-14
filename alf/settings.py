@@ -131,6 +131,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+
 DATE_FORMAT = 'Y/m/d'
 
 LOGGING = { 'version': 1,

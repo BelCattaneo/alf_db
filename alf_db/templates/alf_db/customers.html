@@ -10,9 +10,24 @@
 
 {% render_table table %}
 
-<form action="{% url 'alf_db:customers' %}" method='get'>
-  {{ filter.form.as_p }}
-  <button type="submit">Buscar</button>
+<form id="filter_form" action="{% url 'alf_db:customers' %}" method='get'>
+
+  <div class="btn-group" id="container_filter_name">
+  </div>
+
+  <div class="btn-group" id="container_filter_type">
+  </div>
 </form>
 
 {% endblock content %}
+
+{% block mocha %}
+  {% load static %}
+    <script type="text/javascript">
+      window.alfDb = window.alfDb || [];
+      window.alfDb.filters = {{ customers_filter_fields | safe }}
+    </script>
+
+    <script src="{% static "alf_db/filters.js" %}" ></script>
+
+{% endblock mocha %}
