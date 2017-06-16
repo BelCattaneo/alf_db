@@ -13,7 +13,7 @@
   {# Delete button #}
   <form class="form-inline" action="{% url 'alf_db:delete_product' record.id %}" method="POST">
     {% csrf_token %}
-    <button type="button" class="btn btn-link btn-xs">Borrar</button>
+    <button type="submit" class="btn btn-link btn-xs">Borrar</button>
   </form>
 
 </div>
