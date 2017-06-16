@@ -11,12 +11,8 @@
 {% render_table table %}
 
 <form id="filter_form" action="{% url 'alf_db:customers' %}" method='get'>
-
-  <div class="btn-group" id="container_filter_name">
-  </div>
-
-  <div class="btn-group" id="container_filter_type">
-  </div>
+  {{ filter.form.as_p }}
+  <input type="submit" value="Filtrar">
 </form>
 
 {% endblock content %}

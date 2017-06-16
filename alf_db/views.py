@@ -34,9 +34,9 @@ def customers(request):
 
     customers_filter_fields = CustomersFilter.Meta.fields
 
-    context = {'table': table,
-               'filter': filter,
-               'customers_filter_fields': json.dumps(customers_filter_fields)
+    context = {
+      'table': table,
+      'filter': filter
     }
     
     return render(request, 'alf_db/customers.html', context)

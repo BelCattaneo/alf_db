@@ -20,4 +20,9 @@
 
 10. `python manage.py migrate`
 
+> Database
+
+Drop all tables in alf_db => `python manage.py sqlflush | python manage.py dbshell`
+Seed info to database => `python manage.py loaddata data.json`
+
 
