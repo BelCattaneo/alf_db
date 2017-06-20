@@ -8,12 +8,13 @@
   <button type="button" class="btn btn-primary">Agregar Cliente</button>
 </a>
 
-{% render_table table %}
 
 <form id="filter_form" action="{% url 'alf_db:customers' %}" method='get'>
   {{ filter.form.as_p }}
   <input type="submit" value="Filtrar">
 </form>
+
+{% render_table table %}
 
 {% endblock content %}
 

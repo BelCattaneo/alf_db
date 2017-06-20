@@ -1,6 +1,7 @@
 {% extends "alf_db/base.html" %} 
 
 {% block content %}
+{% load widget_tweaks %}
 
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -10,7 +11,50 @@
 
 <form action="{% url 'alf_db:add_customer' %}" method='post'>
   {% csrf_token %}
-  {{ form.as_p }}
+  
+
+
+  {{ form.non_field_errors }}
+  <div class="form-group">
+    <label for="{{ form.first_name.id_for_label }}">Nombre:</label>
+    {% render_field form.first_name class+="form-control" required="false" %}
+    {{ form.first_name.errors }}
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.last_name.id_for_label }}">Apellido:</label>
+    {% render_field form.last_name class+="form-control" %}
+    {{ form.last_name.errors }}
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.address.id_for_label }}">Direccion:</label>
+    {% render_field form.address class+="form-control" %}
+    {{ form.address.errors }}
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.phone.id_for_label }}">Telefono:</label>
+    {% render_field form.phone class+="form-control" %}
+    {{ form.phone.errors }}
+  </div>
+  
+  <div class="form-group {%if form.email.errors %} has-error {% endif %} ">
+    <label for="{{ form.email.id_for_label }}">Mail:</label>
+    {% render_field form.email class+="form-control" %}
+    <div>
+    {% for error in form.email.errors %}
+      <p class="form-error">{{ error | escape }}</p>
+    {% endfor %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.facebook_username.id_for_label }}">Usuario de Facebook:</label>
+    {% render_field form.facebook_username class+="form-control" %}
+    {{ form.facebook_username.errors }}
+  </div>
+
   <button name="submit">Agregar</button>
 </form>
 

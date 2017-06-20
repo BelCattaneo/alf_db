@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Other Apps
     'django_tables2',
     'django_filters',
+    'widget_tweaks',
 
     # My Apps
     'alf_db',
