@@ -1,30 +1,29 @@
 {% extends "alf_db/base.html" %}
 
+{% load widget_tweaks %}
 {% load render_table from django_tables2 %}
 
 {% block content %}
 
-<a href="{% url 'alf_db:add_customer' %}">
-  <button type="button" class="btn btn-primary">Agregar Cliente</button>
-</a>
+<div style="float: right;">  
+  <a href="{% url 'alf_db:add_customer' %}">
+    <button type="button" class="btn btn-primary">Agregar Cliente</button>
+  </a>
+</div>
 
+<div class="row">
+  <div class="col-sm-9">
+    {% render_table table %}
+  </div>
 
-<form id="filter_form" action="{% url 'alf_db:customers' %}" method='get'>
-  {{ filter.form.as_p }}
-  <input type="submit" value="Filtrar">
-</form>
+  <div class="col-sm-3">
 
-{% render_table table %}
+    <form id="filter_form" action="{% url 'alf_db:customers' %}" method='get'>
+      {{ filter.form.as_p }}
+      <input type="submit" value="Filtrar">
+    </form>
+  </div>
+</div>
+
 
 {% endblock content %}
-
-{% block mocha %}
-  {% load static %}
-    <script type="text/javascript">
-      window.alfDb = window.alfDb || [];
-      window.alfDb.filters = {{ customers_filter_fields | safe }}
-    </script>
-
-    <script src="{% static "alf_db/filters.js" %}" ></script>
-
-{% endblock mocha %}

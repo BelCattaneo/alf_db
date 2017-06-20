@@ -1,5 +1,44 @@
+body {
+  font-family: Ubuntu;
+}
+
 .form-error {
   font-size: 16px;
   color: #a94442;
   line-height: 150%;
 }
+
+.centered-form {
+  width: 70%;
+  margin: auto;
+}
+
+.panel-primary {
+  margin: 10px;
+  background-color: #fff;
+  border-color: #337ab7;
+  border-radius: 3px;
+  color: #337ab7;
+  font-weight: bold;
+}
+
+.panel-primary>.panel-heading {
+    color: #337ab7;
+    background-color: #fff;
+    border: 0;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.panel-title {
+  font-weight: bolder;
+}
+
+.nav-tabs {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  margin-bottom: 20px;
+  font-family: Ubuntu;
+}
+

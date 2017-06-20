@@ -16,14 +16,3 @@
 </form>
 
 {% endblock content %}
-
-{% block mocha %}
-  {% load static %}
-    <script type="text/javascript">
-      window.alfDb = window.alfDb || [];
-      window.alfDb.filters = {{ transactions_filter_fields | safe }}
-    </script>
-
-    <script src="{% static "alf_db/filters.js" %}" ></script>
-
-{% endblock mocha %}

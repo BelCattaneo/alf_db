@@ -9,19 +9,16 @@
     </div>
 </div>
 
-<form action="{% url 'alf_db:add_customer' %}" method='post'>
+<form class="centered-form" action="{% url 'alf_db:add_customer' %}" method='post'>
   {% csrf_token %}
-  
-
-
   {{ form.non_field_errors }}
   <div class="form-group">
     <label for="{{ form.first_name.id_for_label }}">Nombre:</label>
     {% render_field form.first_name class+="form-control" required="false" %}
     <div>
-    {% for error in form.first_name.errors %}
-      <p class="form-error">{{ error | escape }}</p>
-    {% endfor %}
+      {% for error in form.first_name.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
     </div>
   </div>
 
@@ -29,9 +26,9 @@
     <label for="{{ form.last_name.id_for_label }}">Apellido:</label>
     {% render_field form.last_name class+="form-control" %}
     <div>
-    {% for error in form.last_name.errors %}
-      <p class="form-error">{{ error | escape }}</p>
-    {% endfor %}
+      {% for error in form.last_name.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
     </div>
   </div>
 
@@ -39,9 +36,9 @@
     <label for="{{ form.address.id_for_label }}">Direccion:</label>
     {% render_field form.address class+="form-control" %}
     <div>
-    {% for error in form.address.errors %}
-      <p class="form-error">{{ error | escape }}</p>
-    {% endfor %}
+      {% for error in form.address.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
     </div>
   </div>
 
@@ -49,9 +46,9 @@
     <label for="{{ form.phone.id_for_label }}">Telefono:</label>
     {% render_field form.phone class+="form-control" %}
     <div>
-    {% for error in form.phone.errors %}
-      <p class="form-error">{{ error | escape }}</p>
-    {% endfor %}
+      {% for error in form.phone.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
     </div>
   </div>
   
@@ -75,7 +72,7 @@
     </div>
   </div>
 
-  <button name="submit">Agregar</button>
+  <button class="btn btn-primary" name="submit" style="float: right;">Agregar</button>
 </form>
 
 
