@@ -18,25 +18,41 @@
   <div class="form-group">
     <label for="{{ form.first_name.id_for_label }}">Nombre:</label>
     {% render_field form.first_name class+="form-control" required="false" %}
-    {{ form.first_name.errors }}
+    <div>
+    {% for error in form.first_name.errors %}
+      <p class="form-error">{{ error | escape }}</p>
+    {% endfor %}
+    </div>
   </div>
 
   <div class="form-group">
     <label for="{{ form.last_name.id_for_label }}">Apellido:</label>
     {% render_field form.last_name class+="form-control" %}
-    {{ form.last_name.errors }}
+    <div>
+    {% for error in form.last_name.errors %}
+      <p class="form-error">{{ error | escape }}</p>
+    {% endfor %}
+    </div>
   </div>
 
   <div class="form-group">
     <label for="{{ form.address.id_for_label }}">Direccion:</label>
     {% render_field form.address class+="form-control" %}
-    {{ form.address.errors }}
+    <div>
+    {% for error in form.address.errors %}
+      <p class="form-error">{{ error | escape }}</p>
+    {% endfor %}
+    </div>
   </div>
 
   <div class="form-group">
     <label for="{{ form.phone.id_for_label }}">Telefono:</label>
     {% render_field form.phone class+="form-control" %}
-    {{ form.phone.errors }}
+    <div>
+    {% for error in form.phone.errors %}
+      <p class="form-error">{{ error | escape }}</p>
+    {% endfor %}
+    </div>
   </div>
   
   <div class="form-group {%if form.email.errors %} has-error {% endif %} ">
@@ -52,7 +68,11 @@
   <div class="form-group">
     <label for="{{ form.facebook_username.id_for_label }}">Usuario de Facebook:</label>
     {% render_field form.facebook_username class+="form-control" %}
-    {{ form.facebook_username.errors }}
+    <div>
+    {% for error in form.facebook_username.errors %}
+      <p class="form-error">{{ error | escape }}</p>
+    {% endfor %}
+    </div>
   </div>
 
   <button name="submit">Agregar</button>
