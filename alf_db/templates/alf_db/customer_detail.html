@@ -20,7 +20,7 @@
   </a>
   <form class="form-inline" action="{% url 'alf_db:delete_customer' customer.id %}" method="POST">
     {% csrf_token %}
-    <button type="button" class="btn btn-primary active">Borrar</button>
+    <button type="submit" class="btn btn-primary active">Borrar</button>
   </form>
 
 {% endblock content %}
