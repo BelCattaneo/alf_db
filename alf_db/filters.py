@@ -1,6 +1,6 @@
 import django_filters
 
-from .models import Customer, Product
+from .models import Customer, Product, Transaction
 
 class CustomersFilter(django_filters.FilterSet):
     
@@ -27,4 +27,11 @@ class ProductsFilter(django_filters.FilterSet):
             'minimum_stock': ['exact', 'contains'],
             'description': ['exact', 'contains'],
             'date_added': ['exact', 'contains', 'date__range']
+        }
+
+class TransactionsFilter(django_filters.FilterSet):
+    
+    class Meta:
+        model = Product
+        fields = {
         }

@@ -46,11 +46,10 @@
         <a href="{% url 'alf_db:products' %}">Productos</a>
     </li>
 
-    {% comment %} <li role="presentation" class="{% active request '/transactions' %}">
+    <li role="presentation" class="{% active request '/transactions' %}">
         <a href="{% url 'alf_db:transactions' %}">Transacciones</a>
-    </li> {% endcomment %}
+    </li>
 
-    <li role="presentation"><a href="#">Transacciones</a></li>
 </ul>
 
     {% block content %}{% endblock content %}

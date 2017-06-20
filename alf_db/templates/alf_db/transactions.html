@@ -1,0 +1,29 @@
+{% extends "alf_db/base.html" %}
+
+{% load render_table from django_tables2 %}
+
+{% block content %}
+
+<a href="{% url 'alf_db:add_transaction' %}">
+  <button type="button" class="btn btn-primary">Agregar Transacción</button>
+</a>
+
+{% render_table table %}
+
+<form id="filter_form" action="{% url 'alf_db:transactions' %}" method='get'>
+  {{ filter.form.as_p }}
+  <input type="submit" value="Filtrar">
+</form>
+
+{% endblock content %}
+
+{% block mocha %}
+  {% load static %}
+    <script type="text/javascript">
+      window.alfDb = window.alfDb || [];
+      window.alfDb.filters = {{ transactions_filter_fields | safe }}
+    </script>
+
+    <script src="{% static "alf_db/filters.js" %}" ></script>
+
+{% endblock mocha %}

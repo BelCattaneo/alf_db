@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Customer, Product
+from .models import Customer, Product, Transaction  
 
 # Customers Form
 class CustomerForm(forms.ModelForm):
@@ -12,7 +12,8 @@ class CustomerForm(forms.ModelForm):
                   'address': 'Dirección',
                   'phone': 'Teléfono',
                   'email': 'E-Mail',
-                  'facebook_username': 'Facebook'}
+                  'facebook_username': 'Facebook'
+        }
 
 # Products Form
 class ProductForm(forms.ModelForm):
@@ -23,4 +24,15 @@ class ProductForm(forms.ModelForm):
                   'code': 'Código',
                   'quantity': 'Cantitad',
                   'minimum_stock': 'Stock Mínimo',
-                  'description': 'Descripción'}
+                  'description': 'Descripción'
+        }
+
+# Transactions Form
+class TransactionsForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ['delivery_number', 'customer']
+        labels = {'delivery_number':'Numero de Envio',
+                  'customer': 'Cliente',
+        }  
+                

@@ -31,4 +31,16 @@ urlpatterns = [
     url(r'^products/(?P<product_id>[0-9]+)/$', views.product_detail, name='product_detail'),
     # Edit product page
     url(r'^products/edit_product/(?P<product_id>[0-9]+)/$', views.edit_product, name='edit_product'),
+
+    # TRANSACTIONS
+    # Transacions page
+    url(r'^transactions/$', views.transactions, name='transactions'),
+    # Add transaction
+    url(r'^transactions/add_transaction/$', views.add_transaction, name='add_transaction'),
+    # Delete transaction
+    url(r'^transactions/delete/(?P<transaction_id>\d+)/$', views.delete_transaction, name='delete_transaction'),
+    # Detail page
+    url(r'^transactions/(?P<transaction_id>[0-9]+)/$', views.transaction_detail, name='transaction_detail'),
+    # Edit transaction page
+    url(r'^transactions/edit_transaction/(?P<transaction_id>[0-9]+)/$', views.edit_transaction, name='edit_transaction'),
 ] 

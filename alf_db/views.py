@@ -7,10 +7,10 @@ from django.db.models import F
 
 import json
 
-from .models import Customer, Product
-from .forms import CustomerForm, ProductForm
-from .tables import CustomerTable, ProductTable
-from .filters import CustomersFilter, ProductsFilter
+from .models import Customer, Product, Transaction
+from .forms import CustomerForm, ProductForm, TransactionsForm
+from .tables import CustomerTable, ProductTable, TransactionTable
+from .filters import CustomersFilter, ProductsFilter, TransactionsFilter
 
 
 def index(request):
@@ -164,3 +164,76 @@ def edit_product(request, product_id):
     
     context = {'form': form, 'product': product}
     return render(request, 'alf_db/edit_product.html', context)
+
+#---------------------
+# TRANSACTIONS
+#---------------------
+
+def transactions(request):
+    '''Transactions page. Show all transactions'''
+    
+    # Data for the table rendering with django_tables2
+    transactions_query = Transaction.objects.all()
+    
+    filter = TransactionsFilter(request.GET, queryset=transactions_query)
+
+    table = TransactionTable(filter.qs)
+    RequestConfig(request, paginate={'per_page':10}).configure(table)
+
+    transactions_filter_fields = TransactionsFilter.Meta.fields
+
+    context = {
+      'table': table,
+      'filter': filter
+    }
+    
+    return render(request, 'alf_db/transactions.html', context)
+
+def add_transaction(request):
+    '''Adds a transaction'''
+    if request.method != "POST":
+        # No data submitted; create a blank form.
+        form = TransactionsForm()
+    else:
+        # POST data submitted; process data.
+        form = TransactionsForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('alf_db:transactions'))
+    
+    context = {'form': form}
+    return render(request, 'alf_db/add_transaction.html', context)
+
+def delete_transaction(request, transaction_id):
+    '''Deletes a transaction'''
+    if request.method != "POST":
+        raise Http404
+    else:
+        transaction = Transaction.objects.get(id=transaction_id)
+        transaction.delete()
+    return redirect('/transactions')
+
+def transaction_detail(request, transaction_id):
+    '''Transaction detail page.'''
+    transaction = Transaction.objects.get(id=transaction_id)
+    context = {'transaction':transaction}
+    return render(request, 'alf_db/transaction_detail.html', context)
+
+def edit_transaction(request, transaction_id):
+    '''Transactions edit page'''
+    transaction = Transaction.objects.get(id=transaction_id)
+    
+    if request.method != "POST":
+        # Initial request; pre-fill form with the current entry.
+        form = TransactionsForm(instance=transaction)
+    else:
+        # POST data submitted; process data.
+        form = TransactionsForm(instance=transaction, data=request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/transactions')
+    
+    context = {'form': form, 'transaction': transaction}
+    return render(request, 'alf_db/edit_transaction.html', context)

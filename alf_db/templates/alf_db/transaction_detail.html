@@ -1,0 +1,25 @@
+{% extends "alf_db/base.html" %} 
+
+{% block content %}
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Transacción - ID: {{ transaction.id }}</h3>
+    </div>
+  </div>
+
+  <ul class="list-group">
+    <li class="list-group-item">Cliente: {{ transaction.customer }}</li>
+    <li class="list-group-item">Productos:  </li>
+    <li class="list-group-item">Fecha: {{ transaction.date_added }}</li>
+  </ul>
+  
+  <a href="{% url 'alf_db:edit_transaction' transaction.id %}">
+    <button type="button" class="btn btn-primary active">Editar</button>
+  </a>
+  <form class="form-inline" action="{% url 'alf_db:delete_transaction' transaction.id %}" method="POST">
+    {% csrf_token %}
+    <button type="button" class="btn btn-primary active">Borrar</button>
+  </form>
+
+{% endblock content %}
