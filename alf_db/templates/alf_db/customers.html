@@ -16,9 +16,29 @@
   </div>
 
   <div class="col-sm-3">
-    <form id="filter_form" action="{% url 'alf_db:customers' %}" method='get'>
-      {{ filter.form.as_p }}
-      <input type="submit" value="Filtrar">
+    <form class="centered-form" id="filter_form" action="{% url 'alf_db:customers' %}" method='get'>
+      
+      <div class="form-group">
+        <label for="{{ filter.form.first_name__icontains.id_for_label }}">Nombre:</label>
+        {% render_field filter.form.first_name__icontains class+="form-control" %}
+      </div>
+    
+      <div class="form-group">
+        <label for="{{ filter.form.last_name__icontains.id_for_label }}">Apellido:</label>
+        {% render_field filter.form.last_name__icontains class+="form-control" %}
+      </div>
+    
+      <div class="form-group">
+        <label for="{{ filter.form.email__icontains.id_for_label }}">Mail:</label>
+        {% render_field filter.form.email__icontains class+="form-control" %}
+      </div>
+    
+      <div class="form-group">
+        <label for="{{ filter.form.facebook_username__icontains.id_for_label }}">Usuario de Facebook:</label>
+        {% render_field filter.form.facebook_username__icontains class+="form-control" %}
+      </div>
+      
+      <button class="btn btn-primary" name="submit" style="float: right;">Filtrar</button>
     </form>
   </div>
 </div>

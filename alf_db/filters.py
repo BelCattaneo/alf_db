@@ -7,13 +7,13 @@ class CustomersFilter(django_filters.FilterSet):
     class Meta:
         model = Customer
         fields = {
-            'first_name': ['contains'],
-            'last_name': ['contains'],
-            # 'address': 'contains'],
-            # 'phone': ['contains'],
-            'email': ['contains'],
-            'facebook_username': ['contains'],
-            # 'date_added': ['contains', 'date__range']
+            'first_name': ['icontains'],
+            'last_name': ['icontains'],
+            # 'address': 'icontains'],
+            # 'phone': ['icontains'],
+            'email': ['icontains'],
+            'facebook_username': ['icontains'],
+            # 'date_added': ['icontains', 'date__range']
         }
 
 class ProductsFilter(django_filters.FilterSet):
@@ -21,17 +21,20 @@ class ProductsFilter(django_filters.FilterSet):
     class Meta:
         model = Product
         fields = {
-            'name': ['contains'],
-            'code': ['contains'],
-            # 'quantity': ['contains'],
-            # 'minimum_stock': ['contains'],
-            'description': ['contains'],
-            # 'date_added': ['contains', 'date__range']
+            'name': ['icontains'],
+            'code': ['icontains'],
+            # 'quantity': ['icontains'],
+            # 'minimum_stock': ['icontains'],
+            'description': ['icontains'],
+            # 'date_added': ['icontains', 'date__range']
         }
 
 class TransactionsFilter(django_filters.FilterSet):
     
     class Meta:
-        model = Product
+        model = Transaction
         fields = {
+            'delivery_number': ['icontains'],
+            'customer': ['exact'],
+            # 'date_added': ['icontains', 'date__range']
         }
