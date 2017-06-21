@@ -1,0 +1,14 @@
+.detail_table {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+th {
+  width: 30%;
+  padding: 8px 12px 6px 12px;
+
+}
+
+tr {
+  border-bottom: 1px solid #e8e8e8;
+}

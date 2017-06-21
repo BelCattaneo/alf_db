@@ -1,31 +1,55 @@
-{% extends "alf_db/base.html" %} 
+{% extends "alf_db/base.html" %} {% block content %}
 
-{% block content %}
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Detalle de Cliente</h3>
+  </div>
+</div>
 
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{ customer }} - ID: {{ customer.id }}</h3>
-    </div>
+<div class="detail">
+  <div class="detail_table" id="detail_table">
+    <table class="detail_table">
+      <tr class="row row-title">
+        <th>Nombre:</th>
+        <td>{{ customer.first_name }}</td>
+      </tr>
+      <tr class="row">
+        <th>Apellido:</th>
+        <td>{{ customer.last_name }}</td>
+      </tr>
+      <tr class="row">
+        <th>Dirección:</th>
+        <td>{{ customer.address }}</td>
+      </tr>
+      <tr class="row">
+        <th>Teléfono:</th>
+        <td>{{ customer.phone }}</td>
+      </tr>
+      <tr class="row">
+        <th>Mail:</th>
+        <td>{{ customer.email }}</td>
+      </tr>
+      <tr class="row">
+        <th>Usuario de Facebook: </th>
+        <td>{{ customer.facebook_username }}</td>
+      </tr>
+      <tr class="row">
+        <th>Agregado el:</th>
+        <td>{{ customer.date_added }}</td>
+      </tr>
+    </table>
   </div>
 
-  <div class ="detail">
-    <ul class="list-group">
-      <p class="customer-detail-field">Dirección:</p>
-      <li class="list-group-item">{{ customer.address }}</li>
-      <p class="customer-detail-field">Teléfono:</p>
-      <li class="list-group-item">{{ customer.phone }}</li>
-      <p class="customer-detail-field">E-Mail:</p>
-      <li class="list-group-item">{{ customer.email }}</li>
-      <p class="customer-detail-field">Usuario de Facebook:</p>
-      <li class="list-group-item">{{customer.facebook_username}} </li>
-    </ul>
-    
-    <a href="{% url 'alf_db:edit_customer' customer.id %}">
-      <button type="button" class="btn btn-primary active" style="float: right;">Editar</button>
-    </a>
-    <form class="form-inline" action="{% url 'alf_db:delete_customer' customer.id %}" method="POST">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-primary active" style="float: right;">Borrar</button>
-    </form>
-  </div>
+  <a href="{% url 'alf_db:edit_customer' customer.id %}">
+    <button type="button" class="btn btn-primary active" style="float: right;">Historial de Transacciones</button>
+  </a>
+
+  <a href="{% url 'alf_db:edit_customer' customer.id %}">
+    <button type="button" class="btn btn-primary active" style="float: right;">Editar</button>
+  </a>
+  <form class="form-inline" action="{% url 'alf_db:delete_customer' customer.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary active" style="float: right;">Borrar</button>
+  </form>
+</div>
 {% endblock content %}

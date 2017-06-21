@@ -1,5 +1,7 @@
 {% extends "alf_db/base.html" %} 
 
+{% load widget_tweaks %}
+
 {% block content %}
 
 <div class="panel panel-primary">
@@ -8,10 +10,61 @@
     </div>
 </div>
 
-<form action="{% url 'alf_db:add_product' %}" method='post'>
+<form class="centered-form" action="{% url 'alf_db:add_product' %}" method='post'>
   {% csrf_token %}
-  {{ form.as_p }}
-  <button name="submit">Agregar</button>
+  {{ form.non_field_errors }}
+  <div class="form-group">
+    <label for="{{ form.name.id_for_label }}">Nombre:</label>
+    {% render_field form.name class+="form-control" required="false" %}
+    <div>
+      {% for error in form.name.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.code.id_for_label }}">Código:</label>
+    {% render_field form.code class+="form-control" required="false" %}
+    <div>
+      {% for error in form.code.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.quantity.id_for_label }}">Cantidad:</label>
+    {% render_field form.quantity class+="form-control" required="false" %}
+    <div>
+      {% for error in form.quantity.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div> 
+
+  <div class="form-group">
+    <label for="{{ form.minimum_stock.id_for_label }}">Stock Mínimo:</label>
+    {% render_field form.minimum_stock class+="form-control" required="false" %}
+    <div>
+      {% for error in form.minimum_stock.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.description.id_for_label }}">Descripción:</label>
+    {% render_field form.description class+="form-control" required="false" %}
+    <div>
+      {% for error in form.description.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+
+  <button class="btn btn-primary" name="submit" style="float: right;">Agregar</button>
 </form>
 
 

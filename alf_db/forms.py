@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Customer, Product, Transaction  
+from .models import Customer, Product, Transaction, ProdutsPurchased
 
 # Customers Form
 class CustomerForm(forms.ModelForm):
@@ -36,3 +36,9 @@ class TransactionsForm(forms.ModelForm):
                   'customer': 'Cliente',
         }  
                 
+# Purchased Products Form
+class ProductPurchasedForm(forms.ModelForm):
+    class Meta:
+        model = ProdutsPurchased
+        fields = ['product']
+        labels = {'product': 'Producto'}  

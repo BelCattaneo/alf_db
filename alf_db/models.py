@@ -47,7 +47,3 @@ class ProdutsPurchased(models.Model):
     '''Products related to a transaction'''
     transaction = models.ForeignKey(Transaction)
     product = models.ForeignKey(Product)
-
-    def __str__(self):
-        '''Returns a string representation of the model.'''
-        return self.transaction 

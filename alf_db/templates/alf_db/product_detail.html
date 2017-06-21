@@ -1,26 +1,51 @@
-{% extends "alf_db/base.html" %} 
+{% extends "alf_db/base.html" %}
 
 {% block content %}
 
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{ product }} - ID: {{ product.id }}</h3>
-    </div>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Detalle del Producto</h3>
+  </div>
+</div>
+
+<div class="detail">
+  <div class="detail_table" id="detail_table">
+    <table class="detail_table">
+      <tr class="row row-title">
+        <th>Nombre:</th>
+        <td>{{ product.name }}</td>
+      </tr>
+      <tr class="row">
+        <th>Código:</th>
+        <td>{{ product.code }}</td>
+      </tr>
+      <tr class="row">
+        <th>Cantidad:</th>
+        <td>{{ product.quantity }}</td>
+      </tr>
+      <tr class="row">
+        <th>Stock Mínimo:</th>
+        <td>{{ product.minimum_stock }}</td>
+      </tr>
+      <tr class="row">
+        <th>Descripción:</th>
+        <td>{{ product.description }}</td>
+      </tr>
+      <tr class="row">
+        <th>Agregado el:</th>
+        <td>{{ product.date_added }}</td>
+      </tr>
+    </table>
   </div>
 
-  <ul class="list-group">
-    <li class="list-group-item">Código: {{ product.code }}</li>
-    <li class="list-group-item">Cantidad: {{ product.quantity }}</li>
-    <li class="list-group-item">Stock Mínimo: {{ product.minimum_stock }}</li>
-    <li class="list-group-item">Descripción: {{product.description}} </li>
-  </ul>
-  
+
   <a href="{% url 'alf_db:edit_product' product.id %}">
-    <button type="button" class="btn btn-primary active">Editar</button>
+    <button type="button" class="btn btn-primary active" style="float: right;">Editar</button>
   </a>
   <form class="form-inline" action="{% url 'alf_db:delete_product' product.id %}" method="POST">
     {% csrf_token %}
-    <button type="submit" class="btn btn-primary active">Borrar</button>
+    <button type="submit" class="btn btn-primary active" style="float: right;">Borrar</button>
   </form>
+</div>
 
-{% endblock content %}
+  {% endblock content %}

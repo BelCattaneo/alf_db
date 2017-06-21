@@ -1,6 +1,5 @@
 {% extends "alf_db/base.html" %}
-
-
+{% load render_table from django_tables2 %}
 
 {% block content %}
 
@@ -22,22 +21,26 @@
 </div>
 
 
-{% load render_table from django_tables2 %}
+<div class="add">  
+  <a href="{% url 'alf_db:add_product' %}">
+    <button type="button" class="btn btn-primary">Agregar Producto</button>
+  </a>
+</div>
 
-<a href="{% url 'alf_db:add_product' %}">
-  <button type="button" class="btn btn-primary">Agregar Producto</button>
-</a>
-
-{% render_table table %}
-
-<form action="{% url 'alf_db:products' %}" method='get'>
-  <div class="btn-group" id="container_filter_name">
+<div class="row">
+  <div class="col-sm-9">
+    {% render_table table %}
   </div>
-
-  <div class="btn-group" id="container_filter_type">
+  <div class="col-sm-3">
+    <form action="{% url 'alf_db:products' %}" method='get'>
+      <div class="btn-group" id="container_filter_name">
+      </div>
+    
+      <div class="btn-group" id="container_filter_type">
+      </div>
+    
+      <input id="filter_value" type="text"></input>
+    </form>
   </div>
-
-  <input id="filter_value" type="text"></input>
-</form>
-
+</div>
 {% endblock content %}

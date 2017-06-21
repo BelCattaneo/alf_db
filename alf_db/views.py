@@ -7,8 +7,8 @@ from django.db.models import F
 
 import json
 
-from .models import Customer, Product, Transaction
-from .forms import CustomerForm, ProductForm, TransactionsForm
+from .models import Customer, Product, Transaction, ProdutsPurchased
+from .forms import CustomerForm, ProductForm, TransactionsForm, ProductPurchasedForm
 from .tables import CustomerTable, ProductTable, TransactionTable
 from .filters import CustomersFilter, ProductsFilter, TransactionsFilter
 
@@ -193,16 +193,23 @@ def add_transaction(request):
     '''Adds a transaction'''
     if request.method != "POST":
         # No data submitted; create a blank form.
-        form = TransactionsForm()
+        form = TransactionsForm(prefix="transaction")
+        products_form = ProductPurchasedForm(prefix="products")
     else:
         # POST data submitted; process data.
-        form = TransactionsForm(request.POST)
-        
-        if form.is_valid():
-            form.save()
+        form = TransactionsForm(request.POST, prefix="transaction") 
+        products_form = ProductPurchasedForm(request.POST, prefix="products")
+
+        if form.is_valid() and products_form.is_valid():
+            transaction = form.save()
+            product_to_be_saved = products_form.save(commit=False)
+            product_to_be_saved.transaction = transaction
+            product_to_be_saved.save()
+
             return HttpResponseRedirect(reverse('alf_db:transactions'))
-    
-    context = {'form': form}
+
+
+    context = {'transaction_form': form, 'products_form': products_form}
     return render(request, 'alf_db/add_transaction.html', context)
 
 def delete_transaction(request, transaction_id):
@@ -217,7 +224,10 @@ def delete_transaction(request, transaction_id):
 def transaction_detail(request, transaction_id):
     '''Transaction detail page.'''
     transaction = Transaction.objects.get(id=transaction_id)
-    context = {'transaction':transaction}
+    purchased_products = transaction.produtspurchased_set.all()
+    
+    context = {'transaction':transaction, 'purchased_products': purchased_products }
+
     return render(request, 'alf_db/transaction_detail.html', context)
 
 def edit_transaction(request, transaction_id):
