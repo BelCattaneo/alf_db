@@ -233,17 +233,24 @@ def transaction_detail(request, transaction_id):
 def edit_transaction(request, transaction_id):
     '''Transactions edit page'''
     transaction = Transaction.objects.get(id=transaction_id)
-    
+    product = ProdutsPurchased.objects.get(transaction_id=transaction_id)
+
     if request.method != "POST":
         # Initial request; pre-fill form with the current entry.
-        form = TransactionsForm(instance=transaction)
+        form = TransactionsForm(instance=transaction, prefix="transaction")
+        products_form = ProductPurchasedForm(instance=product, prefix="products")
     else:
         # POST data submitted; process data.
-        form = TransactionsForm(instance=transaction, data=request.POST)
+        form = TransactionsForm(instance=transaction, data=request.POST, prefix="transaction")
+        products_form = ProductPurchasedForm(instance=product, data=request.POST, prefix="products")
 
-        if form.is_valid():
-            form.save()
+        if form.is_valid() and products_form.is_valid():
+            transaction = form.save()
+            product_to_be_saved = products_form.save(commit=False)
+            product_to_be_saved.transaction = transaction
+            product_to_be_saved.save()
+
             return redirect('/transactions')
     
-    context = {'form': form, 'transaction': transaction}
+    context = {'form': form, 'transaction': transaction, 'products_form':products_form}
     return render(request, 'alf_db/edit_transaction.html', context)

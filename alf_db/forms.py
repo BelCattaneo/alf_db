@@ -41,4 +41,5 @@ class ProductPurchasedForm(forms.ModelForm):
     class Meta:
         model = ProdutsPurchased
         fields = ['product']
+        product = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices = Product.objects.all())
         labels = {'product': 'Producto'}  

@@ -15,7 +15,7 @@
   {{ form.non_field_errors }}
   <div class="form-group">
     <label for="{{ form.delivery_number.id_for_label }}">Número de Envío:</label>
-    {% render_field form.delivery_number class+="form-control" required="false" %}
+    {% render_field form.delivery_number class+="form-control" %}
     <div>
       {% for error in form.delivery_number.errors %}
       <p class="form-error">{{ error | escape }}</p>
@@ -25,9 +25,19 @@
 
   <div class="form-group">
     <label for="{{ form.customer.id_for_label }}">Cliente:</label>
-    {% render_field form.customer class+="form-control" required="false" %}
+    {% render_field form.customer class+="form-control" %}
     <div>
       {% for error in form.customer.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="{{ products_form.product.id_for_label }}">Producto:</label>
+    {% render_field products_form.product class+="form-control" multiple="multiple"  %}
+    <div>
+      {% for error in products_form.product.errors %}
         <p class="form-error">{{ error | escape }}</p>
       {% endfor %}
     </div>
