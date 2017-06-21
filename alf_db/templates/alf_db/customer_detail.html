@@ -8,19 +8,24 @@
     </div>
   </div>
 
-  <ul class="list-group">
-    <li class="list-group-item">Dirección: {{ customer.address }}</li>
-    <li class="list-group-item">Teléfono: {{ customer.phone }}</li>
-    <li class="list-group-item">E-Mail: {{ customer.email }}</li>
-    <li class="list-group-item">Facebook: {{customer.facebook_username}} </li>
-  </ul>
-  
-  <a href="{% url 'alf_db:edit_customer' customer.id %}">
-    <button type="button" class="btn btn-primary active">Editar</button>
-  </a>
-  <form class="form-inline" action="{% url 'alf_db:delete_customer' customer.id %}" method="POST">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary active">Borrar</button>
-  </form>
-
+  <div class ="detail">
+    <ul class="list-group">
+      <p class="customer-detail-field">Dirección:</p>
+      <li class="list-group-item">{{ customer.address }}</li>
+      <p class="customer-detail-field">Teléfono:</p>
+      <li class="list-group-item">{{ customer.phone }}</li>
+      <p class="customer-detail-field">E-Mail:</p>
+      <li class="list-group-item">{{ customer.email }}</li>
+      <p class="customer-detail-field">Usuario de Facebook:</p>
+      <li class="list-group-item">{{customer.facebook_username}} </li>
+    </ul>
+    
+    <a href="{% url 'alf_db:edit_customer' customer.id %}">
+      <button type="button" class="btn btn-primary active" style="float: right;">Editar</button>
+    </a>
+    <form class="form-inline" action="{% url 'alf_db:delete_customer' customer.id %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary active" style="float: right;">Borrar</button>
+    </form>
+  </div>
 {% endblock content %}

@@ -1,14 +1,79 @@
 {% extends "alf_db/base.html" %} 
 
+{% load widget_tweaks %}
+
 {% block content %}
 
-<p>Editar Cliente:</p>  
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Editar Cliente</h3>
+    </div>
+</div>
 
-<form action="{% url 'alf_db:edit_customer' customer.id %}" method='post'>
+<form class="centered-form" action="{% url 'alf_db:edit_customer' customer.id %}" method='post'>
   {% csrf_token %}
-  {{ form.as_p }}
+  {{ form.non_field_errors }}
+  <div class="form-group">
+    <label for="{{ form.first_name.id_for_label }}">Nombre:</label>
+    {% render_field form.first_name class+="form-control" required="false" %}
+    <div>
+      {% for error in form.first_name.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.last_name.id_for_label }}">Apellido:</label>
+    {% render_field form.last_name class+="form-control" %}
+    <div>
+      {% for error in form.last_name.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.address.id_for_label }}">Direccion:</label>
+    {% render_field form.address class+="form-control" %}
+    <div>
+      {% for error in form.address.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.phone.id_for_label }}">Telefono:</label>
+    {% render_field form.phone class+="form-control" %}
+    <div>
+      {% for error in form.phone.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
   
-  <button type="submit">Guardar</button>
+  <div class="form-group {%if form.email.errors %} has-error {% endif %} ">
+    <label for="{{ form.email.id_for_label }}">Mail:</label>
+    {% render_field form.email class+="form-control" %}
+    <div>
+    {% for error in form.email.errors %}
+      <p class="form-error">{{ error | escape }}</p>
+    {% endfor %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.facebook_username.id_for_label }}">Usuario de Facebook:</label>
+    {% render_field form.facebook_username class+="form-control" %}
+    <div>
+    {% for error in form.facebook_username.errors %}
+      <p class="form-error">{{ error | escape }}</p>
+    {% endfor %}
+    </div>
+  </div>
+
+  <button class="btn btn-primary" name="submit" style="float: right;">Guardar</button>
 </form>
 
 {% endblock content %}

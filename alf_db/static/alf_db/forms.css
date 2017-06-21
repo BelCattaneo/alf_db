@@ -13,6 +13,11 @@ body {
   margin: auto;
 }
 
+.detail {
+  width: 70%;
+  margin: auto;
+}
+
 .panel-primary {
   margin: 10px;
   background-color: #fff;
@@ -42,3 +47,54 @@ body {
   font-family: Ubuntu;
 }
 
+.add {
+  margin: 5px;
+  float: right;
+}
+
+.row {
+  margin: 5px;
+}
+
+.col-sm-3 {
+  margin-top: 20px;
+}
+
+.col-sm-9 {
+  margin-top: 30px;
+}
+
+.btn-primary {
+  margin-left: 5px;
+  font-size: 16px;
+}
+
+.customer-detail-field {
+  font-weight: bold;
+}
+
+.list-group-item {
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    border-top-color: rgb(204, 204, 204);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgb(204, 204, 204);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: rgb(204, 204, 204);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgb(204, 204, 204);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
