@@ -4,6 +4,7 @@ from django.views import generic
 from django.core.urlresolvers import reverse
 from django_tables2 import RequestConfig
 from django.db.models import F
+from django.contrib import messages
 
 import json
 
@@ -52,8 +53,11 @@ def add_customer(request):
         
         if form.is_valid():
             form.save()
+            messages.success(request, 'El cliente se agregó correctamente!')
             return HttpResponseRedirect(reverse('alf_db:customers'))
-    
+        else:
+            messages.warning(request, 'Completar correctamente el formulario')
+
     context = {'form': form}
     return render(request, 'alf_db/add_customer.html', context)
 
@@ -127,6 +131,7 @@ def add_product(request):
         
         if form.is_valid():
             form.save()
+            messages.success(request, 'El producto se agregó correctamente!')
             return HttpResponseRedirect(reverse('alf_db:products'))
     
     context = {'form': form}
@@ -205,6 +210,7 @@ def add_transaction(request):
             product_to_be_saved = products_form.save(commit=False)
             product_to_be_saved.transaction = transaction
             product_to_be_saved.save()
+            messages.success(request, 'La transacción se agregó correctamente!')
 
             return HttpResponseRedirect(reverse('alf_db:transactions'))
 
