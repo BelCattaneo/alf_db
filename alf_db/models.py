@@ -38,6 +38,7 @@ class Transaction(models.Model):
     delivery_number = models.CharField(max_length=20)
     customer = models.ForeignKey(Customer)
     date_added = models.DateTimeField(auto_now_add=True)
+    delivery_date = models.DateField(blank=True, default=None, null=True)
 
     def __str__(self):
         '''Returns a string representation of the model.'''
