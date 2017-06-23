@@ -10,6 +10,24 @@
   </a>
 </div>
 
+<div class="container" >
+  {% if alert_transactions %}
+    <div class="alert alert-warning">
+      <strong>Alerta!</strong> Ya han pasado 15 días desde la recepción de productos de 
+        <a href="#" data-toggle="collapse" data-target="#demo" class="alert-link">transacciones</a>.
+          <div id="demo" class="collapse">
+              {% for transaction in alert_transactions %}
+                <p>
+                  <a href="{% url 'alf_db:transaction_detail' transaction.id %}">{{transaction.id}}</a>
+                </p>
+              {% endfor %}
+          </div>
+    </div>
+ {% endif %}
+</div>
+
+
+
 <div class="row">
   <div class="col-sm-9">
     {% if messages %}

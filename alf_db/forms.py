@@ -31,9 +31,10 @@ class ProductForm(forms.ModelForm):
 class TransactionsForm(forms.ModelForm):
     class Meta:
         model = Transaction
-        fields = ['delivery_number', 'customer']
+        fields = ['delivery_number', 'customer', 'delivery_date']
         labels = {'delivery_number':'Numero de Envio',
                   'customer': 'Cliente',
+                  'delivery_date': 'Fecha de Recepción'
         }  
                 
 # Purchased Products Form

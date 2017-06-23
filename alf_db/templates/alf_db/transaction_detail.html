@@ -29,7 +29,11 @@
       </tr>
       <tr class="row">
         <th>Agregado el:</th>
-        <td>{{ transaction.date_added }}</td>
+        <td>{{ transaction.date_added | date:"d-m-Y"}}</td>
+      </tr>
+      <tr class="row">
+        <th>Fecha de Recepción:</th>
+        <td>{{ transaction.delivery_date }}</td>
       </tr>
     </table>
   </div>

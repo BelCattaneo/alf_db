@@ -12,7 +12,7 @@ from .models import Customer, Product, Transaction, ProdutsPurchased
 from .forms import CustomerForm, ProductForm, TransactionsForm, ProductPurchasedForm
 from .tables import CustomerTable, ProductTable, TransactionTable
 from .filters import CustomersFilter, ProductsFilter, TransactionsFilter
-
+from datetime import datetime, timedelta
 
 def index(request):
     '''The Home Page'''
@@ -179,7 +179,12 @@ def transactions(request):
     
     # Data for the table rendering with django_tables2
     transactions_query = Transaction.objects.all()
-    
+    today = datetime.now()
+    delta = timedelta(days=15)
+    alert_date = today - delta
+
+
+    alert_transactions = transactions_query.filter(delivery_date__lt=(alert_date))
     filter = TransactionsFilter(request.GET, queryset=transactions_query)
 
     table = TransactionTable(filter.qs)
@@ -189,7 +194,8 @@ def transactions(request):
 
     context = {
       'table': table,
-      'filter': filter
+      'filter': filter,
+      'alert_transactions': alert_transactions, 
     }
     
     return render(request, 'alf_db/transactions.html', context)
