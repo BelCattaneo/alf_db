@@ -2,6 +2,11 @@
 {% load widget_tweaks %}
 {% load render_table from django_tables2 %}
 
+{% block scripts %}
+  {% load static %}
+  <script src="{% static "alf_db/filters.js" %}" ></script>
+{% endblock scripts %}
+
 {% block content %}
 
 <div class="add">  
@@ -47,7 +52,7 @@
       </div>
       
       <button class="btn btn-primary" name="submit" style="float: right;">Filtrar</button>
-      <button id="clear" class="btn btn-primary" name="button" style="float: right;">Limpiar</button>
+      <button id="clear" class="btn btn-primary" type="button" name="button" style="float: right;">Limpiar</button>
 
     </form>
   </div>
