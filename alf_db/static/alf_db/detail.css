@@ -17,6 +17,8 @@ tr {
   width: auto;
 }
 
-.collapse {
-  margin-top: 20px;
+
+.check-recept-checkbox {
+    margin: 0;
+    font-size: 14px;
 }

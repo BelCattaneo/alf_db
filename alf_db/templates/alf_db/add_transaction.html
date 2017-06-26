@@ -24,26 +24,6 @@
   </div>
 
   <div class="form-group">
-    <label for="{{ form.delivery_date.id_for_label }}">Fecha de Recepción:</label>
-    {% render_field form.delivery_date class+="form-control" %}
-    <div>
-      {% for error in form.delivery_date.errors %}
-        <p class="form-error">{{ error | escape }}</p>
-      {% endfor %}
-    </div>
-  </div>
-
-   <div class="form-group check-box" >
-    <label for="{{ form.check_reception.id_for_label }}">Recepción de Cheque:</label>
-    {% render_field form.check_reception class+="form-control" %}
-    <div>
-      {% for error in form.check_reception.errors %}
-        <p class="form-error">{{ error | escape }}</p>
-      {% endfor %}
-    </div>
-  </div>
-
-  <div class="form-group">
     <label for="{{ form.customer.id_for_label }}">Cliente:</label>
     {% render_field form.customer class+="form-control" %}
     <div>
