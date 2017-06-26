@@ -31,10 +31,11 @@ class ProductForm(forms.ModelForm):
 class TransactionsForm(forms.ModelForm):
     class Meta:
         model = Transaction
-        fields = ['delivery_number', 'customer', 'delivery_date']
+        fields = ['delivery_number', 'customer', 'delivery_date', 'check_reception']
         labels = {'delivery_number':'Numero de Envio',
                   'customer': 'Cliente',
-                  'delivery_date': 'Fecha de Recepción'
+                  'delivery_date': 'Fecha de Recepción',
+                  'check_reception': 'Recepción de Cheque'
         }  
                 
 # Purchased Products Form
