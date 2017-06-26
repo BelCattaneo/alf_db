@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Customer, Product, Transaction, ProdutsPurchased
+from .models import Customer, Product, Transaction
 
 # Customers Form
 class CustomerForm(forms.ModelForm):
@@ -29,21 +29,16 @@ class ProductForm(forms.ModelForm):
 
 # Transactions Form
 class TransactionsForm(forms.ModelForm):
+    check_reception = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
+    products = forms.ModelMultipleChoiceField(queryset=Product.objects.all())
     class Meta:
         model = Transaction
-        fields = ['delivery_number', 'customer', 'delivery_date', 'check_reception']
-        check_reception = forms.BooleanField(widget=forms.CheckboxInput())
+        fields = ['delivery_number', 'customer', 'delivery_date', 'check_reception', 'products']
         
         labels = {'delivery_number':'Numero de Envio',
                   'customer': 'Cliente',
                   'delivery_date': 'Fecha de Recepción',
-                  'check_reception': 'Recepción de Cheque'
+                  'check_reception': 'Recepción de Cheque',
+                  'products': 'Products'
         }  
                 
-# Purchased Products Form
-class ProductPurchasedForm(forms.ModelForm):
-    class Meta:
-        model = ProdutsPurchased
-        fields = ['product']
-        product = forms.MultipleChoiceField(widget=forms.SelectMultiple, choices = Product.objects.all())
-        labels = {'product': 'Producto'}  

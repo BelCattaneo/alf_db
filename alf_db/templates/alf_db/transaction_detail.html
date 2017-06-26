@@ -18,8 +18,8 @@
       <tr class="row">
         <th>Productos:</th>
         <td>
-          {% for item in purchased_products %}
-            - <a href="{% url 'alf_db:product_detail' item.product.id %}">{{item.product}}</a>    
+          {% for item in transaction.products.all %}
+            - <a href="{% url 'alf_db:product_detail' item.id %}">{{item.name}}</a>    
           {% endfor %}
         </td>
       </tr>

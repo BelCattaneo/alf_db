@@ -40,12 +40,9 @@ class Transaction(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     delivery_date = models.DateField(blank=True, default=None, null=True)
     check_reception = models.BooleanField(default=False)
+    products = models.ManyToManyField(Product)
 
     def __str__(self):
         '''Returns a string representation of the model.'''
         return self.delivery_number
-
-class ProdutsPurchased(models.Model):
-    '''Products related to a transaction'''
-    transaction = models.ForeignKey(Transaction)
-    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+        
