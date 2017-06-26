@@ -1,4 +1,7 @@
-{% extends "alf_db/base.html" %} {% block content %}
+{% extends "alf_db/base.html" %} 
+{% load render_table from django_tables2 %}
+
+{% block content %}
 
 <div class="panel panel-primary">
   <div class="panel-heading">
@@ -40,16 +43,28 @@
     </table>
   </div>
 
-  <a href="{% url 'alf_db:edit_customer' customer.id %}">
-    <button type="button" class="btn btn-primary active" style="float: right;">Historial de Transacciones</button>
-  </a>
+  <div>
+    <a href="{% url 'alf_db:edit_customer' customer.id %}">
+      <button type="button" class="btn btn-primary active" style="float: right;">Editar</button>
+    </a>
+    <form class="form-inline" action="{% url 'alf_db:delete_customer' customer.id %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary active" style="float: right;">Borrar</button>
+    </form>
+    <button type="button" 
+            class="btn btn-primary active" 
+            data-toggle="collapse" 
+            aria-expanded="true" 
+            data-target="#demo" 
+            style="float: left">
+      Historial de Transacciones
+    </button>
+  </div>
+  
+  <div id="demo" class="collapse">
+    {% render_table table %}
+  </div>
 
-  <a href="{% url 'alf_db:edit_customer' customer.id %}">
-    <button type="button" class="btn btn-primary active" style="float: right;">Editar</button>
-  </a>
-  <form class="form-inline" action="{% url 'alf_db:delete_customer' customer.id %}" method="POST">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary active" style="float: right;">Borrar</button>
-  </form>
 </div>
+
 {% endblock content %}

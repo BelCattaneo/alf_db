@@ -43,9 +43,9 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" data-live-search="true">
     <label for="{{ transaction_form.customer.id_for_label }}">Cliente:</label>
-    {% render_field transaction_form.customer class+="form-control" %}
+    {% render_field transaction_form.customer class+="form-control" data-live-search="true" %}
     <div>
       {% for error in transaction_form.customer.errors %}
         <p class="form-error">{{ error | escape }}</p>
@@ -53,9 +53,9 @@
     </div>
   </div>
   
-  <div class="form-group">
+  <div class="form-group" >
     <label for="{{ products_form.product.id_for_label }}">Producto:</label>
-    {% render_field products_form.product class+="form-control" multiple="multiple" %}
+    {% render_field products_form.product class+="form-control" data-live-search="true" multiple="multiple" %}
     <div>
       {% for error in products_form.product.errors %}
         <p class="form-error">{{ error | escape }}</p>

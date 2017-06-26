@@ -73,7 +73,16 @@ def delete_customer(request, customer_id):
 def customer_detail(request, customer_id):
     '''Customer detail page.'''
     customer = Customer.objects.get(id=customer_id)
-    context = {'customer':customer}
+    
+    customer_transactions_query = Transaction.objects.all().filter(customer_id=customer_id)
+    
+    filter = TransactionsFilter(request.GET, queryset=customer_transactions_query)
+
+    table = TransactionTable(filter.qs)
+    
+    context = {'customer':customer,
+               'table': table
+    }
     return render(request, 'alf_db/customer_detail.html', context)
 
 def edit_customer(request, customer_id):

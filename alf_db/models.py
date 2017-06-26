@@ -36,7 +36,7 @@ class Product(models.Model):
 class Transaction(models.Model):
     '''A transaction'''
     delivery_number = models.CharField(max_length=20)
-    customer = models.ForeignKey(Customer)
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
     date_added = models.DateTimeField(auto_now_add=True)
     delivery_date = models.DateField(blank=True, default=None, null=True)
     check_reception = models.BooleanField(default=False)
@@ -48,4 +48,4 @@ class Transaction(models.Model):
 class ProdutsPurchased(models.Model):
     '''Products related to a transaction'''
     transaction = models.ForeignKey(Transaction)
-    product = models.ForeignKey(Product)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)

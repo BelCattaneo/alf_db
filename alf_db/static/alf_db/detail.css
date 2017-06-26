@@ -16,3 +16,7 @@ tr {
 .orderable {
   width: auto;
 }
+
+.collapse {
+  margin-top: 20px;
+}
