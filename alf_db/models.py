@@ -39,7 +39,7 @@ class Transaction(models.Model):
     customer = models.ForeignKey(Customer)
     date_added = models.DateTimeField(auto_now_add=True)
     delivery_date = models.DateField(blank=True, default=None, null=True)
-    check_reception = models.CharField(blank=True, default=None, null=True, max_length=20)
+    check_reception = models.BooleanField(default=False)
 
     def __str__(self):
         '''Returns a string representation of the model.'''

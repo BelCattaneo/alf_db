@@ -33,6 +33,16 @@
     </div>
   </div>
 
+   <div class="form-group check-box" >
+    <label for="{{ transaction_form.check_reception.id_for_label }}">Recepción de Cheque:</label>
+    {% render_field transaction_form.check_reception class+="form-control" %}
+    <div>
+      {% for error in transaction_form.check_reception.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
   <div class="form-group">
     <label for="{{ transaction_form.customer.id_for_label }}">Cliente:</label>
     {% render_field transaction_form.customer class+="form-control" %}

@@ -183,8 +183,9 @@ def transactions(request):
     delta = timedelta(days=15)
     alert_date = today - delta
 
+    check_reception_filter = transactions_query.filter(check_reception=False)
 
-    alert_transactions = transactions_query.filter(delivery_date__lt=(alert_date))
+    alert_transactions = check_reception_filter.filter(delivery_date__lt=(alert_date))
     filter = TransactionsFilter(request.GET, queryset=transactions_query)
 
     table = TransactionTable(filter.qs)
