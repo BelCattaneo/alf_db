@@ -33,7 +33,23 @@
       </tr>
       <tr class="row">
         <th>Fecha de Recepción:</th>
-        <td>{{ transaction.delivery_date }}</td>
+        <td>
+          {% if transaction.delivery_date %}
+            {{ transaction.delivery_date }}
+          {% else %}
+            El cliente no recibió los productos aún.
+          {% endif %}
+        </td>
+      </tr>
+      <tr class="row">
+        <th>Recepción de cheque:</th>
+        <td>
+          {% if transaction.check_reception %}
+            Cheque recibido.
+          {% else %}
+            Cheque no recibido aún.
+          {% endif %}
+        </td>
       </tr>
     </table>
   </div>

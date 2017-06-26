@@ -33,6 +33,7 @@ class TransactionsForm(forms.ModelForm):
         model = Transaction
         fields = ['delivery_number', 'customer', 'delivery_date', 'check_reception']
         check_reception = forms.BooleanField(widget=forms.CheckboxInput())
+        
         labels = {'delivery_number':'Numero de Envio',
                   'customer': 'Cliente',
                   'delivery_date': 'Fecha de Recepción',
