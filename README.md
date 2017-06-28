@@ -13,8 +13,8 @@
 
 > Create user and database for project
 
-8. `create user admin with password 'admin'`
-9. `create database alf with owner = admin`
+8. `create user admin with password 'admin';`
+9. `create database alf with owner = admin;`
 
 > Run migrations
 

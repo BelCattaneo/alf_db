@@ -67,7 +67,11 @@ def delete_customer(request, customer_id):
         raise Http404
     else:
         customer = Customer.objects.get(id=customer_id)
-        customer.delete()
+        try:
+            customer.delete()
+        except:
+             messages.error(request, 'No se puede borrar el cliente debido a que tiene transacciones asociadas.')
+
     return redirect('/customers')
 
 def customer_detail(request, customer_id):
@@ -152,7 +156,11 @@ def delete_product(request, product_id):
         raise Http404
     else:
         product = Product.objects.get(id=product_id)
-        product.delete()
+        try:
+            product.delete()
+        except:
+            messages.error(request, 'No se puede borrar el cliente debido a que tiene transacciones asociadas.')
+
     return redirect('/products')
 
 def product_detail(request, product_id):
