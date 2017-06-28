@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib import admin
+from django.db import IntegrityError
 
 class Customer(models.Model):
     '''A customer'''
@@ -27,6 +28,11 @@ class Product(models.Model):
     minimum_stock = models.IntegerField()
     description = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
+
+    def pre_delete(self):
+        if len(self.transaction_set.all()) > 0:
+          raise IntegrityError("product id: " + self.id +  " has associated transactions")
+
 
     def __str__(self):
         '''Returns a string representation of the model.'''

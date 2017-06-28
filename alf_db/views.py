@@ -157,6 +157,7 @@ def delete_product(request, product_id):
     else:
         product = Product.objects.get(id=product_id)
         try:
+            product.pre_delete()
             product.delete()
         except:
             messages.error(request, 'No se puede borrar el cliente debido a que tiene transacciones asociadas.')
