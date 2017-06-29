@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<form class="centered-form" action="{% url 'alf_db:add_transaction' %}" method='post'>
+<form class="centered-form" action="{% url 'alf_db:add_transaction' %}" method='post' enctype="multipart/form-data">
   {% csrf_token %}
   {{ form.non_field_errors }}
   <div class="form-group">
@@ -39,6 +39,17 @@
     
     <div>
       {% for error in form.products.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+    <div class="form-group" >
+    <label for="{{ form.transaction_images.id_for_label }}">Imágenes:</label>
+     {% render_field form.transaction_images class+="form-control" %}
+    
+    <div>
+      {% for error in form.transaction_images.errors %}
         <p class="form-error">{{ error | escape }}</p>
       {% endfor %}
     </div>

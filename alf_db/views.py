@@ -226,7 +226,8 @@ def add_transaction(request):
         form = TransactionsForm()
     else:
         # POST data submitted; process data.
-        form = TransactionsForm(request.POST) 
+        new_transaction = Transaction(transaction_images = request.FILES['transaction_images'])
+        form = TransactionsForm(request.POST, instance=new_transaction) 
 
         if form.is_valid():
             form.save()
@@ -263,7 +264,10 @@ def edit_transaction(request, transaction_id):
         form = TransactionsForm(instance=transaction)
     else:
         # POST data submitted; process data.
-        form = TransactionsForm(instance=transaction, data=request.POST)
+        if bool(request.FILES):
+            transaction.transaction_images.save(request.FILES['transaction_images']._name, request.FILES['transaction_images'])
+
+        form = TransactionsForm(request.POST, instance=transaction)
 
         if form.is_valid():
             form.save()

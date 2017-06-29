@@ -45,8 +45,9 @@ class Transaction(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
     date_added = models.DateTimeField(auto_now_add=True)
     delivery_date = models.DateField(blank=True, default=None, null=True)
-    check_reception = models.BooleanField(default=False)
+    check_reception = models.BooleanField(default=False )
     products = models.ManyToManyField(Product)
+    transaction_images = models.ImageField(upload_to='transaction_images', blank=True, null=True)
 
     def __str__(self):
         '''Returns a string representation of the model.'''

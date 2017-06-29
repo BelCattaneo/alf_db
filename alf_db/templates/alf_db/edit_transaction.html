@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<form class="centered-form" action="{% url 'alf_db:edit_transaction'  transaction.id %}" method='post'>
+<form class="centered-form" action="{% url 'alf_db:edit_transaction'  transaction.id %}" method='post' enctype="multipart/form-data">
   {% csrf_token %}
   {{ form.non_field_errors }}
   
@@ -79,6 +79,25 @@
       {% endfor %}
     </div>
   </div>
+  
+  <div class="form-group" >
+    <label for="{{ form.transaction_images.id_for_label }}">Imágenes:</label>
+       
+    {% render_field form.transaction_images class+="form-control" %}
+    
+    <div>
+      {% for error in form.transaction_images.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+  {% if transaction.transaction_images %}
+    <div class="col-xs-6 col-md-3">
+      <a href="{{ transaction.transaction_images.url }}" class="thumbnail">
+        <img src="{{ transaction.transaction_images.url }}" alt="...">
+      </a>
+    </div>
+  {% endif %}
 
   <button class="btn btn-primary" name="submit" style="float: right;">Guardar</button>
 </form>

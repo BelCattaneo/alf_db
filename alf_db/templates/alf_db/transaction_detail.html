@@ -51,8 +51,21 @@
           {% endif %}
         </td>
       </tr>
+
+      <tr class="row">
+        <th>Imágenes:</th>
+        <td>
+          {% if transaction.transaction_images %}
+            <div class="col-xs-6 col-md-3">
+              <a href="{{ transaction.transaction_images.url }}" class="thumbnail">
+                <img src="{{ transaction.transaction_images.url }}" alt="...">
+              </a>
+            </div>
+          {% endif %}
+        </td>
+      </tr>
     </table>
-  </div>
+    
  
   <a href="{% url 'alf_db:edit_transaction' transaction.id %}">
     <button type="button" class="btn btn-primary active" style="float: right;">Editar</button>

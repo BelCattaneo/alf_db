@@ -43,4 +43,5 @@ urlpatterns = [
     url(r'^transactions/(?P<transaction_id>[0-9]+)/$', views.transaction_detail, name='transaction_detail'),
     # Edit transaction page
     url(r'^transactions/edit_transaction/(?P<transaction_id>[0-9]+)/$', views.edit_transaction, name='edit_transaction'),
+    
 ] 
