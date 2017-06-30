@@ -79,16 +79,19 @@ def delete_customer(request, customer_id):
 def customer_detail(request, customer_id):
     '''Customer detail page.'''
     customer = Customer.objects.get(id=customer_id)
-    
     customer_transactions_query = Transaction.objects.all().filter(customer_id=customer_id)
     
-    filter = TransactionsFilter(request.GET, queryset=customer_transactions_query)
-
-    table = TransactionTable(filter.qs)
-    
     context = {'customer':customer,
-               'table': table
     }
+
+    if customer_transactions_query:
+        filter = TransactionsFilter(request.GET, queryset=customer_transactions_query)
+        table = TransactionTable(filter.qs)
+        context['table'] = table
+    else:
+        messages.warning(request, 'El cliente no posee transacciones asociadas.')
+
+    
     return render(request, 'alf_db/customer_detail.html', context)
 
 def edit_customer(request, customer_id):
@@ -268,7 +271,6 @@ def transaction_detail(request, transaction_id):
 def edit_transaction(request, transaction_id):
     '''Transactions edit page'''
     transaction = Transaction.objects.get(id=transaction_id)
-    images = TransactionImage.objects.all().filter(transaction=transaction)
 
     if request.method != "POST":
         # Initial request; pre-fill form with the current entry.
@@ -278,10 +280,13 @@ def edit_transaction(request, transaction_id):
         form = TransactionsForm(request.POST, instance=transaction)
 
         if form.is_valid():
-            transaction = form.save()
-            new_image = TransactionImage(image=request.FILES['transaction_images'], transaction=transaction)
-            new_image.save()
-            return redirect('/transactions')
+            updated_transaction = form.save()
+            if bool(request.FILES):
+                new_image = TransactionImage(image=request.FILES['transaction_images'], transaction=updated_transaction)
+                new_image.save()
+            return HttpResponseRedirect(reverse('alf_db:edit_transaction', args=[transaction_id]))
+    
+    images = TransactionImage.objects.all().filter(transaction=transaction)
     
     context = {'form': form, 'transaction': transaction, 'images':images}
     return render(request, 'alf_db/edit_transaction.html', context)

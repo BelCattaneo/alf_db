@@ -59,10 +59,19 @@
             style="float: left">
       Historial de Transacciones
     </button>
+    <div style="height: 50px"></div>
   </div>
   
   <div id="demo" class="collapse">
-    {% render_table table %}
+    {% if messages %}
+    <div class="alert alert-warning" role="alert">
+        {% for message in messages %}
+          {{ message }}
+        {% endfor %}
+    </div>
+    {% else %}
+      {% render_table table %}
+    {% endif %}
   </div>
 
 </div>
