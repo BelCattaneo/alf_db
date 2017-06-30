@@ -44,17 +44,7 @@
     </div>
   </div>
 
-    <div class="form-group" >
-    <label for="{{ form.transaction_images.id_for_label }}">Imágenes:</label>
-     {% render_field form.transaction_images class+="form-control" %}
-    
-    <div>
-      {% for error in form.transaction_images.errors %}
-        <p class="form-error">{{ error | escape }}</p>
-      {% endfor %}
-    </div>
-  </div>
-  
+  <input type="file" name="transaction_images" accept="image/*"> 
 
   <button class="btn btn-primary" name="submit" style="float: right;">Agregar</button>
 </form>

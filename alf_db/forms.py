@@ -31,7 +31,6 @@ class ProductForm(forms.ModelForm):
 class TransactionsForm(forms.ModelForm):
     check_reception = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     products = forms.ModelMultipleChoiceField(queryset=Product.objects.all())
-    transaction_images = forms.ImageField(label='Seleccionar Imagen', required=False)
     class Meta:
         model = Transaction
         fields = ['delivery_number', 'customer', 'delivery_date', 'check_reception', 'products']

@@ -55,11 +55,13 @@
       <tr class="row">
         <th>Imágenes:</th>
         <td>
-          {% if transaction.transaction_images %}
+          {% if images %}
             <div class="col-xs-6 col-md-3">
-              <a href="{{ transaction.transaction_images.url }}" class="thumbnail">
-                <img src="{{ transaction.transaction_images.url }}" alt="...">
-              </a>
+              {% for transaction_image in images %}
+                <a href="{{ transaction_image.image.url }}" class="thumbnail">
+                  <img src="{{ transaction_image.image.url }}" alt="...">
+                </a>
+              {% endfor %}
             </div>
           {% endif %}
         </td>

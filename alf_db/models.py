@@ -47,9 +47,17 @@ class Transaction(models.Model):
     delivery_date = models.DateField(blank=True, default=None, null=True)
     check_reception = models.BooleanField(default=False )
     products = models.ManyToManyField(Product)
-    transaction_images = models.ImageField(upload_to='transaction_images', blank=True, null=True)
 
     def __str__(self):
         '''Returns a string representation of the model.'''
         return self.delivery_number
-        
+
+
+class TransactionImage(models.Model):
+    '''Images attached to a Transaction'''
+    image = models.ImageField(upload_to='transaction_images', blank=True, null=True)
+    transaction = models.ForeignKey(Transaction)
+    
+    def __str__(self):
+        '''Returns a string representation of the model.'''
+        return self.transaction_images.name

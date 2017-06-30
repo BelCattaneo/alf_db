@@ -6,9 +6,11 @@ from django_tables2 import RequestConfig
 from django.db.models import F
 from django.contrib import messages
 
+
+import os
 import json
 
-from .models import Customer, Product, Transaction
+from .models import Customer, Product, Transaction, TransactionImage
 from .forms import CustomerForm, ProductForm, TransactionsForm
 from .tables import CustomerTable, ProductTable, TransactionTable
 from .filters import CustomersFilter, ProductsFilter, TransactionsFilter
@@ -226,11 +228,12 @@ def add_transaction(request):
         form = TransactionsForm()
     else:
         # POST data submitted; process data.
-        new_transaction = Transaction(transaction_images = request.FILES['transaction_images'])
-        form = TransactionsForm(request.POST, instance=new_transaction) 
+        form = TransactionsForm(request.POST) 
 
         if form.is_valid():
-            form.save()
+            transaction = form.save()
+            new_image = TransactionImage(image=request.FILES['transaction_images'], transaction=transaction)
+            new_image.save()
             messages.success(request, 'La transacción se agregó correctamente!')
             return HttpResponseRedirect(reverse('alf_db:transactions'))
 
@@ -244,35 +247,41 @@ def delete_transaction(request, transaction_id):
         raise Http404
     else:
         transaction = Transaction.objects.get(id=transaction_id)
+        
+        images = TransactionImage.objects.all().filter(transaction=transaction)
+        for transaction_image in images: 
+            transaction_image.delete()
+        
         transaction.delete()
+        
     return redirect('/transactions')
 
 def transaction_detail(request, transaction_id):
     '''Transaction detail page.'''
     transaction = Transaction.objects.get(id=transaction_id)
+    images = TransactionImage.objects.all().filter(transaction=transaction)
     
-    context = {'transaction':transaction}
+    context = {'transaction':transaction, 'images':images}
 
     return render(request, 'alf_db/transaction_detail.html', context)
 
 def edit_transaction(request, transaction_id):
     '''Transactions edit page'''
     transaction = Transaction.objects.get(id=transaction_id)
+    images = TransactionImage.objects.all().filter(transaction=transaction)
 
     if request.method != "POST":
         # Initial request; pre-fill form with the current entry.
         form = TransactionsForm(instance=transaction)
     else:
         # POST data submitted; process data.
-        if bool(request.FILES):
-            transaction.transaction_images.save(request.FILES['transaction_images']._name, request.FILES['transaction_images'])
-
         form = TransactionsForm(request.POST, instance=transaction)
 
         if form.is_valid():
-            form.save()
-
+            transaction = form.save()
+            new_image = TransactionImage(image=request.FILES['transaction_images'], transaction=transaction)
+            new_image.save()
             return redirect('/transactions')
     
-    context = {'form': form, 'transaction': transaction}
+    context = {'form': form, 'transaction': transaction, 'images':images}
     return render(request, 'alf_db/edit_transaction.html', context)
