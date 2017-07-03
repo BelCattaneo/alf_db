@@ -5,6 +5,7 @@
 {% block scripts %}
   {% load static %}
   <script src="{% static "alf_db/checkBox.js" %}" ></script>
+  <script src="{% static "alf_db/select.js" %}" ></script>
 {% endblock scripts %}
 
 {% block content %}
@@ -62,7 +63,7 @@
 
   <div class="form-group">
     <label for="{{ form.customer.id_for_label }}">Cliente:</label>
-    {% render_field form.customer class+="form-control" %}
+    {% render_field form.customer class+="form-control js-example-basic-single" %}
     <div>
       {% for error in form.customer.errors %}
         <p class="form-error">{{ error | escape }}</p>
@@ -72,7 +73,7 @@
 
   <div class="form-group">
     <label for="{{ form.products.id_for_label }}">Producto:</label>
-    {% render_field form.products class+="form-control" %}
+    {% render_field form.products class+="form-control js-example-basic-multiple" %}
     <div>
       {% for error in form.products.errors %}
         <p class="form-error">{{ error | escape }}</p>

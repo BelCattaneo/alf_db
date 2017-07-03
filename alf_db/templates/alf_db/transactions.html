@@ -5,6 +5,7 @@
 {% block scripts %}
   {% load static %}
   <script src="{% static "alf_db/filters.js" %}" ></script>
+  <script src="{% static "alf_db/select.js" %}" ></script>
 {% endblock scripts %}
 
 {% block content %}
@@ -58,7 +59,7 @@
     
       <div class="form-group">
         <label for="{{ filter.form.customer.id_for_label }}">Cliente:</label>
-        {% render_field filter.form.customer class+="form-control" %}
+        {% render_field filter.form.customer class+="form-control js-example-basic-single" %}
       </div>
       
       <button class="btn btn-primary" name="submit" style="float: right;">Filtrar</button>
