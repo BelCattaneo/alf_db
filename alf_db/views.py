@@ -235,8 +235,11 @@ def add_transaction(request):
 
         if form.is_valid():
             transaction = form.save()
-            new_image = TransactionImage(image=request.FILES['transaction_images'], transaction=transaction)
-            new_image.save()
+
+            if bool(request.FILES):
+                new_image = TransactionImage(image=request.FILES['transaction_images'], transaction=transaction)
+                new_image.save()
+            
             messages.success(request, 'La transacción se agregó correctamente!')
             return HttpResponseRedirect(reverse('alf_db:transactions'))
 
