@@ -16,7 +16,15 @@
   </div>
 </div>
 
+
 <form class="centered-form" action="{% url 'alf_db:edit_transaction'  transaction.id %}" method='post' enctype="multipart/form-data">
+{% if messages %}
+  <div class="alert alert-success" role="alert">
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}
+  </div>
+{% endif %}
   {% csrf_token %}
   {{ form.non_field_errors }}
   
@@ -81,22 +89,27 @@
     </div>
   </div>
   
-  <div class="form-group" >
+    <input type="file" name="transaction_images" accept="image/*"> 
+  <button class="btn btn-primary" name="submit" style="float: right;">Guardar</button>
+
+
+</form>
+<div class="clearfix"></div>
+  <div class="form-group  centered-form" >
     <label for="{{ form.transaction_images.id_for_label }}">Imágenes:</label>
       {% if images %}
-        <div class="col-xs-6 col-md-3">
+        <div>
           {% for transaction_image in images %}
-            <a href="{{ transaction_image.image.url }}" class="thumbnail">
-              <img src="{{ transaction_image.image.url }}" alt="...">
-            </a>
+              
+            <form class="form-inline" action="{% url 'alf_db:delete_image' transaction.id transaction_image.id %}" style="display: inline;" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-link btn-xs">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              </button> 
+            </form>
+            <img src="{{ transaction_image.image.url }}" alt="{{ transaction_image.image.name }}">  
           {% endfor %}
         </div>
       {% endif %}
-    <input type="file" name="transaction_images" accept="image/*"> 
   </div>
-
-
-  <button class="btn btn-primary" name="submit" style="float: right;">Guardar</button>
-</form>
-
 {% endblock content %}
