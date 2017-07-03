@@ -43,5 +43,6 @@ urlpatterns = [
     url(r'^transactions/(?P<transaction_id>[0-9]+)/$', views.transaction_detail, name='transaction_detail'),
     # Edit transaction page
     url(r'^transactions/edit_transaction/(?P<transaction_id>[0-9]+)/$', views.edit_transaction, name='edit_transaction'),
-    
+    # Delete image
+    url(r'^transactions/delete_image/(?P<transaction_id>[0-9]+)/(?P<image_id>[0-9]+)/$', views.delete_image, name='delete_image'),
 ] 

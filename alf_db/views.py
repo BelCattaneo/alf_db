@@ -290,3 +290,14 @@ def edit_transaction(request, transaction_id):
     
     context = {'form': form, 'transaction': transaction, 'images':images}
     return render(request, 'alf_db/edit_transaction.html', context)
+
+def delete_image(request, transaction_id, image_id):
+
+    if request.method != "POST":
+        raise Http404
+    else:
+        image = TransactionImage.objects.get(transaction_id=transaction_id, id=image_id)
+        image.delete()
+        messages.success(request, 'La imagen se borró correctamente!')
+
+    return HttpResponseRedirect(reverse('alf_db:edit_transaction', args=[transaction_id]))
