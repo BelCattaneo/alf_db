@@ -1,5 +1,10 @@
 {% extends "alf_db/base.html" %} 
 
+{% block scripts %}
+  {% load static %}
+  <script src="{% static "alf_db/gallery.js" %}" ></script>
+{% endblock scripts %}
+
 {% block content %}
 
 <div class="panel panel-primary">
@@ -56,11 +61,13 @@
         <th>Imágenes:</th>
         <td>
           {% if images %}
-            <div class="col-xs-6 col-md-3 images" >
+            <ul class="bxslider" >
               {% for transaction_image in images %}
-                <a href="{{ transaction_image.image.url }}" class="thumbnail">
-                  <img src="{{ transaction_image.image.url }}" alt="{{ transaction_image.image.name }}">
-                </a>
+                <li>
+                  <a href="{{ transaction_image.image.url }}" class="thumbnail">
+                    <img src="{{ transaction_image.image.url }}" alt="{{ transaction_image.image.name }}">
+                  </a>
+                </li>
               {% endfor %}
             </div>
           {% endif %}
