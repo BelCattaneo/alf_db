@@ -6,6 +6,7 @@
   {% load static %}
   <script src="{% static "alf_db/checkBox.js" %}" ></script>
   <script src="{% static "alf_db/select.js" %}" ></script>
+  <script src="{% static "alf_db/thumbnails.js" %}" ></script>
 {% endblock scripts %}
 
 {% block content %}
@@ -97,19 +98,19 @@
 <div class="clearfix"></div>
   <div class="form-group  centered-form" >
     <label for="{{ form.transaction_images.id_for_label }}">Imágenes:</label>
+    <div class="clearfix" style="height: 25px;"></div>
       {% if images %}
-        <div>
-          {% for transaction_image in images %}
-              
-            <form class="form-inline" action="{% url 'alf_db:delete_image' transaction.id transaction_image.id %}" style="display: inline;" method="POST">
+        {% for transaction_image in images %}
+          <div class="image-container" style="overflow: hidden; width: 150px; height: 150px; display: inline-block; position: relative;">
+            <form class="form-inline" action="{% url 'alf_db:delete_image' transaction.id transaction_image.id %}" style="display: none;" method="POST">
               {% csrf_token %}
               <button type="submit" class="btn btn-link btn-xs">
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
               </button> 
             </form>
-            <img src="{{ transaction_image.image.url }}" alt="{{ transaction_image.image.name }}">  
-          {% endfor %}
-        </div>
+            <img style="position: absolute;" class="thumbnail-image" src="{{ transaction_image.image.url }}" alt="{{ transaction_image.image.name }}">  
+          </div>
+        {% endfor %}
       {% endif %}
   </div>
 {% endblock content %}
