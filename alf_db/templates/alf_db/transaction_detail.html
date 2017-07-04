@@ -63,7 +63,7 @@
     <ul class="bxslider" >
       {% for transaction_image in images %}
         <li>
-          <a href="{{ transaction_image.image.url }}" class="thumbnail">
+          <a href="{{ transaction_image.image.url }}" target="_blank" class="thumbnail">
             <img src="{{ transaction_image.image.url }}" alt="{{ transaction_image.image.name }}">
           </a>
         </li>
