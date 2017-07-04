@@ -2,6 +2,10 @@ body {
   font-family: Ubuntu;
 }
 
+.remove-underline:hover {
+  text-decoration: none;
+}
+
 .bx-wrapper {
   margin: auto;
 }
