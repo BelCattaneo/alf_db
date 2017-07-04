@@ -34,7 +34,7 @@
       </tr>
       <tr class="row">
         <th>Agregado el:</th>
-        <td>{{ transaction.date_added | date:"d-m-Y"}}</td>
+        <td>{{ transaction.date_added}}</td>
       </tr>
       <tr class="row">
         <th>Fecha de Recepción:</th>
@@ -73,11 +73,11 @@
     
  
   <a href="{% url 'alf_db:edit_transaction' transaction.id %}">
-    <button type="button" class="btn btn-primary active" style="float: right;">Editar</button>
+    <button type="button" class="btn btn-primary" style="float: right;">Editar</button>
   </a>
   <form class="form-inline" action="{% url 'alf_db:delete_transaction' transaction.id %}" method="POST">
     {% csrf_token %}
-    <button type="submit" class="btn btn-primary active" style="float: right;">Borrar</button>
+    <button type="submit" class="btn btn-primary" style="float: right;">Borrar</button>
   </form>
 </div>
 

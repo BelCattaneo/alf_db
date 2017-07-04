@@ -8,13 +8,23 @@
   <script src="{% static "alf_db/select.js" %}" ></script>
   <script src="{% static "alf_db/thumbnails.js" %}" ></script>
   <script src="{% static "alf_db/navigation.js" %}" ></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({
+      dateFormat: "dd/mm/yy"
+    });    
+  } );
+  </script>
 {% endblock scripts %}
 
 {% block content %}
 
+
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Nueva Transacción</h3>
+    <h3 class="panel-title">Editar Transacción</h3>
   </div>
 </div>
 
@@ -61,7 +71,7 @@
 
   <div class="form-group">
     <label for="{{ form.delivery_date.id_for_label }}">Fecha de Recepción de los Productos:</label>
-    {% render_field form.delivery_date class+="form-control" %}
+    {% render_field form.delivery_date class+="form-control" id="datepicker" %}
     <div>
       {% for error in form.delivery_date.errors %}
       <p class="form-error">{{ error | escape }}</p>
@@ -91,7 +101,11 @@
     </div>
   </div>
   
-    <input type="file" name="transaction_images" accept="image/*"> 
+  <div  class="btn btn-primary" style="margin-left:0;  ">
+    <input type="file" name="transaction_images" accept="image/*"  style="opacity:0;  position: absolute;"> 
+    <p style="margin: 0 0 0px;">Agregar Imagen </p>
+  </div>
+
   <button class="btn btn-primary" name="submit" style="float: right;">Guardar</button>
   <button id="save-image-button" class="btn btn-primary" name="submit" style="float: right;">Guardar Imagen</button>
 
@@ -99,9 +113,10 @@
 </form>
 <div class="clearfix"></div>
   <div class="form-group  centered-form" >
-    <label for="{{ form.transaction_images.id_for_label }}">Imágenes:</label>
     <div class="clearfix" style="height: 25px;"></div>
       {% if images %}
+      <label for="{{ form.transaction_images.id_for_label }}">Imágenes:</label>
+      <div class="clearfix" style="height: 25px;"></div>
         {% for transaction_image in images %}
           <div class="image-container" style="border-radius: 7px; border: 1px solid grey; overflow: hidden; width: 150px; height: 150px; display: inline-block; position: relative;">
             <form class="form-inline" action="{% url 'alf_db:delete_image' transaction.id transaction_image.id %}" style="display: inline;" method="POST">

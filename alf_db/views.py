@@ -310,3 +310,4 @@ def delete_image(request, transaction_id, image_id):
         messages.success(request, 'La imagen se borró correctamente!')
 
     return HttpResponseRedirect(reverse('alf_db:edit_transaction', args=[transaction_id]))
+

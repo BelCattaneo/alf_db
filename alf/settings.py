@@ -184,3 +184,12 @@ if os.getenv('ENV', 'dev') == 'heroku':
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+SHORT_DATETIME_FORMAT = "d/m/Y"
+DATETIME_FORMAT = "d/m/Y"
+
+SHORT_DATE_FORMAT = "d/m/Y"
+DATE_FORMAT = "d/m/Y"
+
+
+DATE_INPUT_FORMATS = ["%d/%m/%Y"]

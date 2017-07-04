@@ -2,6 +2,9 @@ from django import forms
 
 from .models import Customer, Product, Transaction
 
+
+
+
 # Customers Form
 class CustomerForm(forms.ModelForm):
     class Meta:
@@ -31,10 +34,10 @@ class ProductForm(forms.ModelForm):
 class TransactionsForm(forms.ModelForm):
     check_reception = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     products = forms.ModelMultipleChoiceField(queryset=Product.objects.all())
+    delivery_date = forms.DateField(required=False)
     class Meta:
         model = Transaction
         fields = ['delivery_number', 'customer', 'delivery_date', 'check_reception', 'products']
-        
         labels = {'delivery_number':'Numero de Envio',
                   'customer': 'Cliente',
                   'delivery_date': 'Fecha de Recepción',
