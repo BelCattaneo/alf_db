@@ -2,6 +2,10 @@ body {
   font-family: Ubuntu;
 }
 
+.bx-wrapper {
+  margin: auto;
+}
+
 .form-error {
   font-size: 16px;
   color: #a94442;

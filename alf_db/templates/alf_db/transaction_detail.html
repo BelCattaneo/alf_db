@@ -57,23 +57,19 @@
         </td>
       </tr>
 
-      <tr class="row">
-        <th>Imágenes:</th>
-        <td>
-          {% if images %}
-            <ul class="bxslider" >
-              {% for transaction_image in images %}
-                <li>
-                  <a href="{{ transaction_image.image.url }}" class="thumbnail">
-                    <img src="{{ transaction_image.image.url }}" alt="{{ transaction_image.image.name }}">
-                  </a>
-                </li>
-              {% endfor %}
-            </div>
-          {% endif %}
-        </td>
-      </tr>
     </table>
+
+  {% if images %}
+    <ul class="bxslider" >
+      {% for transaction_image in images %}
+        <li>
+          <a href="{{ transaction_image.image.url }}" class="thumbnail">
+            <img src="{{ transaction_image.image.url }}" alt="{{ transaction_image.image.name }}">
+          </a>
+        </li>
+      {% endfor %}
+    </div>
+  {% endif %}
     
  
   <a href="{% url 'alf_db:edit_transaction' transaction.id %}">

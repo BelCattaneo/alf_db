@@ -1,3 +1,5 @@
 $(document).ready(function(){
-  $('.bxslider').bxSlider();
+  $('.bxslider').bxSlider({
+    slideWidth: 500
+  });
 });
