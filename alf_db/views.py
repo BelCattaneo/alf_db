@@ -287,7 +287,13 @@ def edit_transaction(request, transaction_id):
             if bool(request.FILES):
                 new_image = TransactionImage(image=request.FILES['transaction_images'], transaction=updated_transaction)
                 new_image.save()
-            return HttpResponseRedirect(reverse('alf_db:edit_transaction', args=[transaction_id]))
+            
+            if 'stay' in request.POST:
+                return HttpResponseRedirect(reverse('alf_db:edit_transaction', args=[transaction_id]))
+            else:
+                return redirect('/transactions')
+
+            
     
     images = TransactionImage.objects.all().filter(transaction=transaction)
     

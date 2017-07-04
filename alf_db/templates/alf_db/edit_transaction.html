@@ -7,6 +7,7 @@
   <script src="{% static "alf_db/checkBox.js" %}" ></script>
   <script src="{% static "alf_db/select.js" %}" ></script>
   <script src="{% static "alf_db/thumbnails.js" %}" ></script>
+  <script src="{% static "alf_db/navigation.js" %}" ></script>
 {% endblock scripts %}
 
 {% block content %}
@@ -92,6 +93,7 @@
   
     <input type="file" name="transaction_images" accept="image/*"> 
   <button class="btn btn-primary" name="submit" style="float: right;">Guardar</button>
+  <button id="save-image-button" class="btn btn-primary" name="submit" style="float: right;">Guardar Imagen</button>
 
 
 </form>

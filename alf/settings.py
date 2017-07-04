@@ -134,9 +134,6 @@ STATIC_URL = '/static/'
 
 
 
-DATE_FORMAT = 'd-m-Y'
-SHORT_DATETIME_FORMAT =  'd-m-Y '
-
 LOGGING = { 'version': 1,
             'filters': { 
                 'require_debug_true': { 
