@@ -10,11 +10,6 @@
 
 {% block content %}
 
-<div class="add">
-  <a href="{% url 'alf_db:add_transaction' %}">
-    <button type="button" class="btn btn-primary">Agregar Transacción</button>
-  </a>
-</div>
 
 <div class="container" >
   {% if alert_transactions %}
@@ -34,6 +29,11 @@
  {% endif %}
 </div>
 
+<div class="add">
+  <a href="{% url 'alf_db:add_transaction' %}">
+    <button type="button" class="btn btn-primary">Agregar Transacción</button>
+  </a>
+</div>
 
 
 <div class="row">
