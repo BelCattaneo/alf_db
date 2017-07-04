@@ -101,11 +101,11 @@
     <div class="clearfix" style="height: 25px;"></div>
       {% if images %}
         {% for transaction_image in images %}
-          <div class="image-container" style="overflow: hidden; width: 150px; height: 150px; display: inline-block; position: relative;">
-            <form class="form-inline" action="{% url 'alf_db:delete_image' transaction.id transaction_image.id %}" style="display: none;" method="POST">
+          <div class="image-container" style="border-radius: 7px; border: 1px solid grey; overflow: hidden; width: 150px; height: 150px; display: inline-block; position: relative;">
+            <form class="form-inline" action="{% url 'alf_db:delete_image' transaction.id transaction_image.id %}" style="display: inline;" method="POST">
               {% csrf_token %}
               <button type="submit" class="btn btn-link btn-xs">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <span style="z-index: 10;" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
               </button> 
             </form>
             <img style="position: absolute;" class="thumbnail-image" src="{{ transaction_image.image.url }}" alt="{{ transaction_image.image.name }}">  
