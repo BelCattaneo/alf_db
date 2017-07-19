@@ -1,24 +1,28 @@
 ### Development Guide
-
-1. `git clone git@github.com:BelCattaneo/alf_db.git`
-2. `get https://bootstrap.pypa.io/get-pip.py`
-3. `sudo python3 ~/get-pip.py`
-4. `pip install --user virtualenv`
+1. `sudo apt-get install python3`
+2. `udo apt-get install git`
+3. `git clone https://github.com/BelCattaneo/alf_db.git`
+4. `wget https://bootstrap.pypa.io/get-pip.py`
+5. `sudo python3 get-pip.py`
+6. `pip install --user virtualenv`
 
 > From project's root folder
 
-5. `virtualenv alf_env`
-6. `source alf_env/bin/activate`
-7. `pip install -r requirements.txt`
+7. `virtualenv alf_env`
+8. `source alf_env/bin/activate`
+9. `pip install -r requirements.txt`
 
 > Create user and database for project
 
-8. `create user admin with password 'admin';`
-9. `create database alf with owner = admin;`
+10. `psql create user admin with password 'admin';`
+11. `psql create database alf with owner = admin;`
 
 > Run migrations
 
-10. `python manage.py migrate`
+12. `python manage.py migrate`
+
+> Run app
+13. `python manage.py runserver`
 
 > Database
 
