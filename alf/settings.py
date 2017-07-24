@@ -158,6 +158,8 @@ LOGGING = { 'version': 1,
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap.html"
 
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
 # Heroku settings
 
 
@@ -181,6 +183,7 @@ if os.getenv('ENV', 'dev') == 'heroku':
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
     )
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

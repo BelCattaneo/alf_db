@@ -5,6 +5,19 @@
 {% block scripts %}
   {% load static %}
   <script src="{% static "alf_db/select.js" %}" ></script>
+  <script>
+    $(function() {  
+      function readName(input) {
+        if (input.files && input.files[0]) {
+            $('#image-name').html(input.files[0].name);
+        }
+      }
+      
+      $("#image").change(function(){
+          readName(this);
+      });
+    });
+  </script>
 {% endblock scripts %}
 
 
@@ -53,11 +66,16 @@
   </div>
 
   <div  class="btn btn-primary" style="margin-left:0;  ">
-    <input type="file" name="transaction_images" accept="image/*"  style="opacity:0;  position: absolute;"> 
+    <input id="image" type="file" name="transaction_images" accept="image/*"  style="opacity:0;  position: absolute;"> 
     <p style="margin: 0 0 0px;">Agregar Imagen </p>
   </div>
-
+  
   <button class="btn btn-primary" name="submit" style="float: right;">Agregar</button>
+  
+  <div>
+    <p id="image-name"></p>
+  </div>
+
 </form>
 
 
