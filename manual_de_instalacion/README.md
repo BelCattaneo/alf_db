@@ -1,3 +1,5 @@
+Manual de Instalación
+
 1. `Crear usuario en https://bitbucket.org`
 2. `Abrir la terminal (Konsole)`
 3. `Instalar Git: sudo apt-get install git`
