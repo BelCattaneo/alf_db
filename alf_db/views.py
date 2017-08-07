@@ -33,6 +33,8 @@ def customers(request):
     filter = CustomersFilter(request.GET, queryset=customers_query)
 
     table = CustomerTable(filter.qs)
+    table.order_by = 'id'
+    
     RequestConfig(request, paginate={'per_page':10}).configure(table)
 
     customers_filter_fields = CustomersFilter.Meta.fields
@@ -126,6 +128,8 @@ def products(request):
     filter = ProductsFilter(request.GET, queryset=products_query)
 
     table = ProductTable(filter.qs)
+    table.order_by = 'id'
+
     RequestConfig(request, paginate={'per_page':10}).configure(table)
 
     products_filter_fields = ProductsFilter.Meta.fields
@@ -165,7 +169,7 @@ def delete_product(request, product_id):
             product.pre_delete()
             product.delete()
         except:
-            messages.error(request, 'No se puede borrar el cliente debido a que tiene transacciones asociadas.')
+            messages.error(request, 'No se puede borrar el producto debido a que tiene transacciones asociadas.')
 
     return redirect('/products')
 
@@ -212,6 +216,8 @@ def transactions(request):
     filter = TransactionsFilter(request.GET, queryset=transactions_query)
 
     table = TransactionTable(filter.qs)
+    table.order_by = 'id'
+
     RequestConfig(request, paginate={'per_page':10}).configure(table)
 
     transactions_filter_fields = TransactionsFilter.Meta.fields
