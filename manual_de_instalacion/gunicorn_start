@@ -1,10 +1,10 @@
 #!/bin/bash
 
-NAME="alf_db"                                             # Name of the application
-DJANGODIR=/home/mint/alf_db                 # Django project directory
-SOCKFILE=/tmp/alf_db.sock                                 # we will communicte using this unix socket
-USER=mint                                                 # the user to run as
-GROUP=mint                                                # the group to run as
+NAME="alf_db"                                             # Name of the application 
+DJANGODIR=/home/mint/alf_db                               # Django project directory (CAMBIAR MINT POR NOMBRE DE USUARIO)
+SOCKFILE=/tmp/alf_db.sock                                 # we will communicte using this unix socket 
+USER=mint                                                 # the user to run as (CAMBIAR MINT POR NOMBRE DE USUARIO)
+GROUP=mint                                                # the group to run as (CAMBIAR MINT POR NOMBRE DE USUARIO)
 NUM_WORKERS=3                                             # how many worker processes should Gunicorn spawn
 DJANGO_SETTINGS_MODULE=alf.settings                       # which settings file should Django use
 DJANGO_WSGI_MODULE=alf.wsgi                               # WSGI module name

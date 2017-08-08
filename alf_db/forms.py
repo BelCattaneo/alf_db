@@ -9,9 +9,10 @@ from .models import Customer, Product, Transaction
 class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ['first_name', 'last_name', 'address', 'phone', 'email', 'facebook_username']
+        fields = ['first_name', 'last_name', 'socio', 'address', 'phone', 'email', 'facebook_username']
         labels = {'first_name':'Nombre',
                   'last_name': 'Apellido',
+                  'socio': 'Número de Socio',
                   'address': 'Dirección',
                   'phone': 'Teléfono',
                   'email': 'E-Mail',
@@ -37,9 +38,10 @@ class TransactionsForm(forms.ModelForm):
     delivery_date = forms.DateField(required=False)
     class Meta:
         model = Transaction
-        fields = ['delivery_number', 'customer', 'delivery_date', 'check_reception', 'products']
+        fields = ['delivery_number', 'customer','pay_date', 'delivery_date', 'check_reception', 'products']
         labels = {'delivery_number':'Numero de Envio',
                   'customer': 'Cliente',
+                  'pay_date': 'Fecha de Pago',
                   'delivery_date': 'Fecha de Recepción',
                   'check_reception': 'Recepción de Cheque',
                   'products': 'Products'

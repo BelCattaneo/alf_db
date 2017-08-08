@@ -37,6 +37,16 @@
         <td>{{ transaction.date_added}}</td>
       </tr>
       <tr class="row">
+        <th>Fecha de Pago:</th>
+        <td>
+          {% if transaction.pay_date %}
+            {{ transaction.pay_date }}
+          {% else %}
+            -
+          {% endif %}
+        </td>
+      </tr>
+      <tr class="row">
         <th>Fecha de Recepción:</th>
         <td>
           {% if transaction.delivery_date %}

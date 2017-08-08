@@ -209,10 +209,13 @@ def transactions(request):
     today = datetime.now()
     delta = timedelta(days=15)
     alert_date = today - delta
+    pay_date_alert = today + delta
+    
 
     check_reception_filter = transactions_query.filter(check_reception=False)
 
     alert_transactions = check_reception_filter.filter(delivery_date__lt=(alert_date))
+    pay_date_alert_transactions = transactions_query.filter(pay_date__isnull=False, pay_date__lt=(pay_date_alert))
     filter = TransactionsFilter(request.GET, queryset=transactions_query)
 
     table = TransactionTable(filter.qs)
@@ -225,7 +228,8 @@ def transactions(request):
     context = {
       'table': table,
       'filter': filter,
-      'alert_transactions': alert_transactions, 
+      'alert_transactions': alert_transactions,
+      'pay_date_alert_transactions': pay_date_alert_transactions, 
     }
     
     return render(request, 'alf_db/transactions.html', context)

@@ -6,6 +6,7 @@ class Customer(models.Model):
     '''A customer'''
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    socio = models.CharField(blank=True, default=None, null=True, max_length=50)
     address = models.CharField(max_length=50)
     phone = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
@@ -44,6 +45,7 @@ class Transaction(models.Model):
     delivery_number = models.CharField(max_length=20)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
     date_added = models.DateTimeField(auto_now_add=True)
+    pay_date = models.DateField(blank=True, default=None, null=True)
     delivery_date = models.DateField(blank=True, default=None, null=True)
     check_reception = models.BooleanField(default=False )
     products = models.ManyToManyField(Product)

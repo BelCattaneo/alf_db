@@ -21,6 +21,16 @@
         <td>{{ customer.last_name }}</td>
       </tr>
       <tr class="row">
+        <th>Número de Socio:</th>
+        <td>
+          {% if customer.socio %}
+            {{ customer.socio }}
+          {% else %}
+            -
+          {% endif %}
+        </td>
+      </tr>
+      <tr class="row">
         <th>Dirección:</th>
         <td>{{ customer.address }}</td>
       </tr>

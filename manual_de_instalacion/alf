@@ -1,10 +1,12 @@
+# (CAMBIAR MINT POR NOMBRE DE USUARIO EN LA LINEA 9)
+
 server {
    listen 8000;
    server_name 127.0.0.1;
 
    location = /favicon.ico { access_log off; log_not_found off; }
    location /static/ {
-       root /home/mint/alf_db;
+       root /home/mint/alf_db;                                      
    }
 
    location / {

@@ -15,10 +15,29 @@
   {% if alert_transactions %}
     <div class="alert alert-danger">
       <strong>Alerta!</strong> Ya han pasado 15 días desde la recepción de productos de 
-        <a href="#" data-toggle="collapse" data-target="#demo" class="alert-link">transacciones</a>.
-          <div id="demo" class="collapse">
+        <a href="#" data-toggle="collapse" data-target="#demo1" class="alert-link">transacciones</a>.
+          <div id="demo1" class="collapse">
             <ul>Número de Envío:
               {% for transaction in alert_transactions %}
+                <li>
+                  <a href="{% url 'alf_db:transaction_detail' transaction.id %}">  {{transaction.delivery_number}}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+    </div>
+ {% endif %}
+</div>
+
+<div class="container" >
+  {% if pay_date_alert_transactions %}
+    <div class="alert alert-danger">
+      <strong>Alerta!</strong> Hay  
+        <a href="#" data-toggle="collapse" data-target="#demo2" class="alert-link">transacciones</a> 
+        cuyas fechas de pago están por vencer.
+          <div id="demo2" class="collapse">
+            <ul>Número de Envío:
+              {% for transaction in pay_date_alert_transactions %}
                 <li>
                   <a href="{% url 'alf_db:transaction_detail' transaction.id %}">  {{transaction.delivery_number}}</a>
                 </li>
