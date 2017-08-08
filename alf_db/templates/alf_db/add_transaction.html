@@ -5,6 +5,8 @@
 {% block scripts %}
   {% load static %}
   <script src="{% static "alf_db/select.js" %}" ></script>
+  <link rel="stylesheet" href= "{% static "alf_db/jquery-ui.css" %}">
+  <script src="{% static "alf_db/jquery-ui.js" %}"></script>
   <script>
     $(function() {  
       function readName(input) {
@@ -17,6 +19,13 @@
           readName(this);
       });
     });
+  </script>
+  <script>
+    $(function() {
+      $( "#datepicker" ).datepicker({
+        dateFormat: "dd/mm/yy"
+      });    
+    } );
   </script>
 {% endblock scripts %}
 
@@ -51,24 +60,22 @@
       {% endfor %}
     </div>
   </div>
-
-  <div class="form-group">
-    <label for="{{ form.pay_date.id_for_label }}">Fecha de Pago:</label>
-    {% render_field form.pay_date class+="js-example-basic-single form-control" %}
+  
+  <div class="form-group" >
+    <label for="{{ form.products.id_for_label }}">Productos:</label>
+      {% render_field form.products class+="js-example-basic-multiple form-control" multiple="multiple" role="combobox" aria-haspopup="true"%}   
     <div>
-      {% for error in form.pay_date.errors %}
+      {% for error in form.products.errors %}
         <p class="form-error">{{ error | escape }}</p>
       {% endfor %}
     </div>
   </div>
-  
-  <div class="form-group" >
 
-    <label for="{{ form.products.id_for_label }}">Productos:</label>
-      {% render_field form.products class+="js-example-basic-multiple form-control" multiple="multiple" role="combobox" aria-haspopup="true"%}
-    
+  <div class="form-group">
+    <label for="{{ form.pay_date.id_for_label }}">Fecha de Pago:</label>
+    {% render_field form.pay_date class+="form-control" id="datepicker" %}
     <div>
-      {% for error in form.products.errors %}
+      {% for error in form.pay_date.errors %}
         <p class="form-error">{{ error | escape }}</p>
       {% endfor %}
     </div>
