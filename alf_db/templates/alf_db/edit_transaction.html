@@ -12,10 +12,12 @@
   <script src="{% static "alf_db/jquery-ui.js" %}"></script>
   <script>
     $(function() {
-      $( "#datepicker" ).datepicker({
-        dateFormat: "dd/mm/yy"
-      });    
-    } );
+      ["#datepicker", "#datepicker2"].forEach(function(datePickerId){
+        $( datePickerId ).datepicker({
+          dateFormat: "dd/mm/yy"
+        });
+      });
+    });
   </script>
 {% endblock scripts %}
 
@@ -81,7 +83,7 @@
 
   <div class="form-group">
     <label for="{{ form.delivery_date.id_for_label }}">Fecha de Recepción de los Productos:</label>
-    {% render_field form.delivery_date class+="form-control" id="datepicker" %}
+    {% render_field form.delivery_date class+="form-control" id="datepicker2" %}
     <div>
       {% for error in form.delivery_date.errors %}
       <p class="form-error">{{ error | escape }}</p>
