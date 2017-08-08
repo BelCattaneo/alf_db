@@ -31,7 +31,7 @@ class ProductTable(tables.Table):
 
 class TransactionTable(tables.Table):
     actions = tables.TemplateColumn(template_name='alf_db/transactions_actions.html',verbose_name='Acciones')
-    delivery_number = tables.Column(verbose_name='Numero de Envio')
+    delivery_number = tables.Column(verbose_name='Número de Envio')
     customer = tables.Column(verbose_name='Cliente')
     pay_date = tables.Column(verbose_name='Fecha de Pago')
     delivery_date = tables.DateColumn(verbose_name='Fecha de Recepción')
