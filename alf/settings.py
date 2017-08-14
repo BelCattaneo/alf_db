@@ -55,7 +55,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'alf_db.middleware.BasicAuthenticationMiddleware',
+    
 ]
+
+BASICAUTH_USERNAME = 'user'
+BASICAUTH_PASSWORD = 'pass'
 
 ROOT_URLCONF = 'alf.urls'
 
