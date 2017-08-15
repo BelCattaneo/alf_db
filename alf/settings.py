@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_tables2',
     'django_filters',
     'widget_tweaks',
+    'cloudinary',
 
     # My Apps
     'alf_db',
@@ -189,9 +190,17 @@ if os.getenv('ENV', 'dev') == 'heroku':
         os.path.join(BASE_DIR, 'static'),
     )
 
+#Cloudinary settings
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'alfdb',
+    'API_KEY': '299811627351774',
+    'API_SECRET': '_BWdKzC5mn196pZHToNgtBRyZnw',
+}
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 SHORT_DATETIME_FORMAT = "d/m/Y"
 DATETIME_FORMAT = "d/m/Y"

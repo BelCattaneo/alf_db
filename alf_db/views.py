@@ -15,6 +15,9 @@ from .forms import CustomerForm, ProductForm, TransactionsForm
 from .tables import CustomerTable, ProductTable, TransactionTable
 from .filters import CustomersFilter, ProductsFilter, TransactionsFilter
 from datetime import datetime, timedelta
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 def index(request):
     '''The Home Page'''
@@ -267,6 +270,7 @@ def delete_transaction(request, transaction_id):
         images = TransactionImage.objects.all().filter(transaction=transaction)
         for transaction_image in images: 
             transaction_image.delete()
+            cloudinary.uploader.destroy(transaction_image.image.name, invalidate=True)
         
         transaction.delete()
         
@@ -317,6 +321,7 @@ def delete_image(request, transaction_id, image_id):
     else:
         image = TransactionImage.objects.get(transaction_id=transaction_id, id=image_id)
         image.delete()
+        cloudinary.uploader.destroy(image.image.name, invalidate=True)
         messages.success(request, 'La imagen se borró correctamente!')
 
     return HttpResponseRedirect(reverse('alf_db:edit_transaction', args=[transaction_id]))
