@@ -48,6 +48,7 @@ class Transaction(models.Model):
     pay_date = models.DateField(blank=True, default=None, null=True)
     delivery_date = models.DateField(blank=True, default=None, null=True)
     check_reception = models.BooleanField(default=False )
+    payment_reception = models.BooleanField(default=False )
     products = models.ManyToManyField(Product)
 
     def __str__(self):

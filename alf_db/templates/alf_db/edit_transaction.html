@@ -32,14 +32,17 @@
 </div>
 
 
-<form class="centered-form" action="{% url 'alf_db:edit_transaction'  transaction.id %}" method='post' enctype="multipart/form-data">
-{% if messages %}
-  <div class="alert alert-success" role="alert">
-    {% for message in messages %}
-      {{ message }}
-    {% endfor %}
-  </div>
-{% endif %}
+<form class="centered-form"
+      action="{% url 'alf_db:edit_transaction'  transaction.id %}"
+      method='post'
+      enctype="multipart/form-data">
+  {% if messages %}
+    <div class="alert alert-success" role="alert">
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+    </div>
+  {% endif %}
   {% csrf_token %}
   {{ form.non_field_errors }}
   
@@ -48,7 +51,8 @@
      <span class="button-checkbox">
         <button type="button" 
                 class="btn  check-recept-checkbox" 
-                data-color="primary">
+                data-color="primary"
+                style="margin-right: 10px">
                 Recepción de Cheque
                 {% render_field form.check_reception style="display: none;" %}
         </button>
@@ -60,6 +64,24 @@
     </div>
   </div>
   
+  <div class="form-group pull-right" >
+
+     <span class="button-checkbox">
+        <button type="button" 
+                class="btn  check-recept-checkbox" 
+                data-color="primary"
+                style="margin-right: 10px">
+                Recepción del Pago
+                {% render_field form.payment_reception style="display: none;" %}
+        </button>
+    </span>
+    <div>
+      {% for error in form.check_reception.errors %}
+        <p class="form-error">{{ error | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
   <div class="clearfix"></div>
   
   <div class="form-group">

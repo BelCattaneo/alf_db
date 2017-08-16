@@ -216,9 +216,10 @@ def transactions(request):
     
 
     check_reception_filter = transactions_query.filter(check_reception=False)
-
+    payment_reception_filter = transactions_query.filter(payment_reception=False)
+    
     alert_transactions = check_reception_filter.filter(delivery_date__lt=(alert_date))
-    pay_date_alert_transactions = transactions_query.filter(pay_date__isnull=False, pay_date__lt=(pay_date_alert))
+    pay_date_alert_transactions = payment_reception_filter.filter(pay_date__isnull=False, pay_date__lt=(pay_date_alert))
     filter = TransactionsFilter(request.GET, queryset=transactions_query)
 
     table = TransactionTable(filter.qs)

@@ -36,6 +36,7 @@ class TransactionTable(tables.Table):
     pay_date = tables.Column(verbose_name='Fecha de Pago')
     delivery_date = tables.DateColumn(verbose_name='Fecha de Recepción')
     check_reception = tables.BooleanColumn(verbose_name='Recepción de Cheque')
+    payment_reception = tables.BooleanColumn(verbose_name='Recepción de Pago')
     date_added = tables.DateColumn(verbose_name='Fecha de Creación')
     class Meta:
         model = Transaction

@@ -34,16 +34,18 @@ class ProductForm(forms.ModelForm):
 # Transactions Form
 class TransactionsForm(forms.ModelForm):
     check_reception = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
+    payment_reception = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
     products = forms.ModelMultipleChoiceField(queryset=Product.objects.all())
     delivery_date = forms.DateField(required=False)
     class Meta:
         model = Transaction
-        fields = ['delivery_number', 'customer','pay_date', 'delivery_date', 'check_reception', 'products']
+        fields = ['delivery_number', 'customer','pay_date', 'delivery_date', 'check_reception', 'payment_reception', 'products']
         labels = {'delivery_number':'Número de Envio',
                   'customer': 'Cliente',
                   'pay_date': 'Fecha de Pago',
                   'delivery_date': 'Fecha de Recepción',
                   'check_reception': 'Recepción de Cheque',
+                  'payment_reception': 'Recepción de Pago',
                   'products': 'Productos'
         }  
                 
